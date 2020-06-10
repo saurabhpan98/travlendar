@@ -1,1 +1,10 @@
 https://github.com/saurabhpan98/travlendar.git
+
+//git commands 
+1. git add .   = reach to staging area 
+2. git commit -m "my changes"    = commit your changes to branch 
+3. git log     = logs all commits along with author and time 
+4. git log --online  = logs all commits in simples way 
+5. Going to previously made commit in history 
+   git checkout <commit_id>    and for returning to original    ->   git checkout master 
+6.     
