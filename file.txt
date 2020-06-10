@@ -4,7 +4,30 @@ https://github.com/saurabhpan98/travlendar.git
 1. git add .   = reach to staging area 
 2. git commit -m "my changes"    = commit your changes to branch 
 3. git log     = logs all commits along with author and time 
-4. git log --online  = logs all commits in simples way 
+4. git log --oneline  = logs all commits in simples way 
 5. Going to previously made commit in history 
    git checkout <commit_id>    and for returning to original    ->   git checkout master 
-6.     
+6. Show all branches -> git branch -a 
+7. Checkout(move) to another branch -> git checkout <branch_name>
+8. We can make changes and checkout to master branch. We will not lose any changes in branch
+9. To delete a branch, first go to master branch and then delete 
+   git checkout master 
+   git branch -D <branch_name>
+10. Make a branch and checkout automatically 
+    git checkout -b <branch_name>
+11. To merge branch to master, first checkout to master and then merge 
+    git merge <branch_name>
+12. Push a branch to repo 
+    git push <url> <branch_name>
+13. Make alias so that we don't have to use <url> again and again  
+    git remote add origin <url> 
+    Now we can use this instead of 12 -> git push origin <branch_name(generally master)>
+14. To clone existing repository on github, this automatically sets 'origin' 
+    git clone <url>
+15. Pull request - to make my local master up to date as on github. I should be on master  
+    git pull origin master 
+16. After making some changes to our own branch, changes should be made like this so that 
+    first others can see it and then merge it 
+    git push origin <my_branch_name>
+    And then do some other stuff on github 
+17. Fork -> to copy someone else repo to my account 
