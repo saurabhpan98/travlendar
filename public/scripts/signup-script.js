@@ -9,9 +9,6 @@ var submit =document.getElementById("submit");
 
 submit.addEventListener('click',()=>{
      
-       if(username.style.borderColor == "red"){
-           event.preventDefault();
-        }
        
        $.ajax({
         type: "POST",

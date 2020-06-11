@@ -3,7 +3,7 @@ var router = express.Router();
 var passport = require('passport');
 
 //models
-var User = require(/*Model Path*/);
+var User = require('../model/user');
 
 var { forwardAuthenticated } = require('../config/auth');
 

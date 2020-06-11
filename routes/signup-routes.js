@@ -10,7 +10,7 @@ var LocalStrategy = require("passport-local");
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended: true}));
 
-var User = require('../Models/userModel');
+var User = require('../model/user');
 
 router.post('/signup', function(req, res){
     var newUser = new User({
