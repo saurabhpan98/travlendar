@@ -1,4 +1,4 @@
-var userName=document.getElementById("user").value();
+var username=document.getElementById("user").value();
 var password=document.getElementById("password").value();
 
 $(function(){
@@ -6,7 +6,7 @@ $(function(){
     type:'POST',
     async:false,
     url:'/login',
-    data:{userName:userName,password:password};
+    data:{username:username,password:password};
     success:function(data){
       alert("successfully logged in");
       var link=__dirname+'/event';
