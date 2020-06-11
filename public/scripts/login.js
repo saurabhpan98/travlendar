@@ -1,4 +1,4 @@
-var email=document.getElementById("email").value();
+var userName=document.getElementById("user").value();
 var password=document.getElementById("password").value();
 
 $(function(){
@@ -6,12 +6,16 @@ $(function(){
     type:'POST',
     async:false,
     url:'/login',
-    data:{email:email,password:password};
+    data:{userName:userName,password:password};
     success:function(data){
-      console.log("login completed");
+      alert("successfully logged in");
+      var link=__dirname+'/event';
+      window.location.href=link;
     }
     error:function(req,res){
-      res.sendFile(__dirname+'/login');
+      alert("login unsuccessful");
+      var link=__dirname+'/login';
+      window.location.href=link;
     }
   });
 });
