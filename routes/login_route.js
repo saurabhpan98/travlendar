@@ -3,23 +3,22 @@ var router = express.Router();
 var passport = require('passport');
 
 //models
-var User = require('../dbModels/userModel');
+var User = require(/*Model Path*/);
 
 var { forwardAuthenticated } = require('../config/auth');
 
 router.get('/login', forwardAuthenticated , function(req, res){
-    ////console.log(req.user);
   if(req.user){
-    res.redirect('/');
+    res.redirect('/profile');
   }
   else{
-    res.render('login');
+    res.sendFile(__dirname+'/login');
   }
 })
 
 router.post('/login', function(req, res, next){
   passport.authenticate('local', {
-    successRedirect: '/personalBlog',
+    successRedirect: '/profile',
     failureRedirect: '/login',
     failureFlash: true
   })(req, res, next);

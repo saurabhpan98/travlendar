@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const passport =require('passport');
-const passportLocal =require('passport_local'); 
+const LocalStrategy =require('passport_local'); 
 const db = require('./config/keys').mongoURI;
 require('./config/passport')(passport);
 const app = express();
