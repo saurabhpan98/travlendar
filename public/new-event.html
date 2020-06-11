@@ -1,93 +1,321 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <title>Travlendar</title>
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/fonts/material-icons.min.css">
+        <link rel="stylesheet" href="assets/css/Navigation-Clean.css">
+        <link rel="stylesheet" href="assets/css/styles.css">
+        
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Travlendar</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/fonts/material-icons.min.css">
-    <link rel="stylesheet" href="assets/css/Navigation-Clean.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
-</head>
+        <script src='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js'></script>
+        <link href='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css' rel='stylesheet' />
 
-<body>
-    <nav class="navbar navbar-light navbar-expand-md shadow-sm">
-        <div class="container-fluid"><a class="navbar-brand" href="#">Travlendar</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse"
-                id="navcol-1">
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item px-2" role="presentation" href="#"><a class="nav-link active" href="index.html">Home</a></li>
-                    <li class="nav-item px-2" role="presentation">
-                        <div class="nav-item dropdown dropleft"><a class="" data-toggle="dropdown" aria-expanded="false" href="#"><i class="material-icons btn">notifications</i></a>
-                            <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Notification 1</a><a class="dropdown-item" role="presentation" href="#">Notification 2</a><a class="dropdown-item" role="presentation" href="#">Notification 3</a></div>
-                        </div>
-                    </li>
-                    <li class="nav-item px-2" role="presentation">
-                        <div class="nav-item dropdown dropleft"><a class="" data-toggle="dropdown" aria-expanded="false" href="#"><i class="material-icons btn">person</i></a>
-                            <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Profile</a><a class="dropdown-item" role="presentation" href="profile.html">Events</a><a class="dropdown-item" role="presentation" href="#">Settings</a><a class="dropdown-item" role="presentation"
-                                    href="#">Privacy &amp; Policy</a><a class="dropdown-item" role="presentation" href="#">Terms &amp; Cond.</a></div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="container pb-5 mb-5"><input type="text" class="text-center form-control mt-5 mb-3" placeholder="Event name" name="event_name">
-        <div class="row mt-3">
-            <div class="col-lg-5">
-                <form>
-                    <div class="form-row my-2">
-                        <div class="col-lg-3 my-2"><label class="col-form-label">From</label></div>
-                        <div class="col-lg-5"><input class="form-control my-2" type="date"></div>
-                        <div class="col-lg-4 my-2"><input class="form-control" type="time"></div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-lg-3 my-2"><label class="col-form-label">Until</label></div>
-                        <div class="col-lg-5 my-2"><input class="form-control" type="date"></div>
-                        <div class="col-lg-4 my-2"><input class="form-control" type="time"></div>
-                    </div>
-                    <div class="form-row py-3">
-                        <div class="col-lg-3"><label class="col-form-label">Event location</label></div>
-                        <div class="col-lg-9"><input class="form-control" type="text" placeholder="Event location" name="event_location"></div>
-                    </div>
-                    <div class="form-row py-3">
-                        <div class="col-lg-3"><label class="col-form-label">Start location</label></div>
-                        <div class="col-lg-9"><input class="form-control" type="text" placeholder="Start location" name="start_location"></div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-lg-3 my-2"><label class="col-form-label">Departure&nbsp;</label></div>
-                        <div class="col-lg-5 my-2"><input class="form-control" type="date"></div>
-                        <div class="col-lg-4 my-2"><input class="form-control" type="time"></div>
-                    </div><button class="btn btn-outline-primary btn-block mt-3" type="button" data-target="#mode_modal" data-toggle="modal">Choose transportation mode</button></form>
-            </div>
-            <div class="col">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6995.957599046851!2d77.11126152526765!3d28.75004992948604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d0127947c9d65%3A0x12ce9ec01b812d4e!2sDelhi%20Technological%20University%2C%20Shahbad%20Daulatpur%20Village%2C%20Rohini%2C%20Delhi%2C%20110042!5e0!3m2!1sen!2sin!4v1591703470089!5m2!1sen!2sin" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-            </div>
-        </div><textarea class="form-control my-4 text-center" name="note" placeholder="Add extra note (optional)"></textarea><button class="btn btn-primary float-right" type="button">Save event</button><button class="btn btn-outline-danger float-right mr-3"
-            type="button">Cancel</button>
-        <div class="modal fade" role="dialog" tabindex="-1" id="mode_modal" aria-labelledby="modeModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Select your transportation mode</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-row">
-                                <div class="col-lg-3 text-center"><i class="material-icons d-block">train</i><span class="d-block">3 hours 2 mins</span><span class="d-block">5 km&nbsp;</span><input type="radio" class="mt-3" name="mode"></div>
-                                <div class="col-lg-3 text-center"><i class="material-icons d-block">directions_car</i><span class="d-block">2 hours</span><span class="d-block">3 km</span><input type="radio" class="mt-3" name="mode"></div>
-                                <div class="col-lg-3 text-center"><i class="material-icons d-block">motorcycle</i><span class="d-block">3 hours</span><span class="d-block">4 km</span><input type="radio" class="mt-3" name="mode"></div>
-                                <div class="col-lg-3 text-center"><i class="material-icons d-block">directions_walk</i><span class="d-block">7 hours 4 mins</span><span class="d-block">8 km</span><input type="radio" class="mt-3" name="mode"></div>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-light navbar-expand-md shadow-sm">
+            <div class="container-fluid"><a class="navbar-brand" href="#">Travlendar</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse"
+                    id="navcol-1">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item px-2" role="presentation" href="#"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item px-2" role="presentation" href="#"><a class="nav-link" href="profile.html">Events</a></li>
+                        <li class="nav-item px-2" role="presentation" href="#"><a class="nav-link" href="settings.html">Settings</a></li>
+                        <li class="nav-item px-2" role="presentation">
+                            <div class="nav-item dropdown dropleft"><a class="" data-toggle="dropdown" aria-expanded="false" href="#"><i class="material-icons btn">notifications</i></a>
+                                <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Notification 1</a><a class="dropdown-item" role="presentation" href="#">Notification 2</a><a class="dropdown-item" role="presentation" href="#">Notification 3</a></div>
                             </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container pb-5 mb-5">
+            <h2 class="mt-5 mb-3">New event</h2>
+            <input type="text" class="text-center form-control mb-3" placeholder="Event name" name="event_name" id="event_name">
+            <div class="row mt-3">
+                <div class="col-lg-5">
+                    <form id = "event_form">
+                        <div class="form-row my-2">
+                            <div class="col-lg-3 my-2"><label class="col-form-label">From</label></div>
+                            <div class="col-lg-5"><input class="form-control my-2" type="date" name = "from_date" required /></div>
+                            <div class="col-lg-4 my-2"><input class="form-control" type="time" name = "from_time" required /></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-3 my-2"><label class="col-form-label">Until</label></div>
+                            <div class="col-lg-5 my-2"><input class="form-control" type="date" name = "until_date" required /></div>
+                            <div class="col-lg-4 my-2"><input class="form-control" type="time" name = "until_time" required /></div>
+                        </div>
+                        <div class="form-row py-3">
+                            <div class="col-lg-3"><label class="col-form-label">Event location</label></div>
+                            <div class="col-lg-9"><input class="form-control" type="text" placeholder="Event location" name="event_location" id="event_location" required /><ul class = "pr-2 w-100 list-group position-absolute" style="z-index: 9999;" id = "event_location_list"></ul></div>
+                        </div>
+                        <div class="form-row py-3">
+                            <div class="col-lg-3"><label class="col-form-label">Start location</label></div>
+                            <div class="col-lg-9"><input class="form-control" type="text" placeholder="Start location" name="start_location" id="start_location" required /><ul class = "pr-2 w-100 list-group position-absolute" style="z-index: 9999;" id = "start_location_list"></ul></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-3 my-2"><label class="col-form-label">Departure&nbsp;</label></div>
+                            <div class="col-lg-5 my-2"><input class="form-control" type="date" name = "departure_date"></div>
+                            <div class="col-lg-4 my-2"><input class="form-control" type="time" name = "departure_time"></div>
+                        </div><button class="btn btn-outline-primary btn-block mt-3" type="button" data-target="#mode_modal" data-toggle="modal">Choose transportation mode</button>
+                    </form>
+                </div>
+                <div class="col" id="map">
+                    
+                </div>
+            </div>
+            <textarea class="form-control my-4 text-center" name="note" placeholder="Add extra note (optional)" id="extra_note"></textarea>
+            <div id="show_alert" class="">
+                
+            </div>
+            <button class="btn btn-primary float-right" type="button" id="event_submit">Save event</button>
+            <a href="profile.html" class="btn btn-outline-danger float-right mr-3" type="button">Cancel</a>
+            
+            
+            <div class="modal fade" role="dialog" tabindex="-1" id="mode_modal" aria-labelledby="modeModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Select your transportation mode</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        </div>
+                        <form id = "transportation_mode_form">
+                            <div class="modal-body">
+                                <div class="form-row">
+                                    <div class="col-lg-3 text-center"><i class="material-icons d-block">train</i><span class="d-block">3 hours 2 mins</span><span class="d-block">5 km&nbsp;</span><input type="radio" class="mt-3" name="mode" value = "train"></div>
+                                    <div class="col-lg-3 text-center"><i class="material-icons d-block">directions_car</i><span class="d-block">2 hours</span><span class="d-block">3 km</span><input type="radio" class="mt-3" name="mode" value = "car"></div>
+                                    <div class="col-lg-3 text-center"><i class="material-icons d-block">motorcycle</i><span class="d-block">3 hours</span><span class="d-block">4 km</span><input type="radio" class="mt-3" name="mode" value = "bike"></div>
+                                    <div class="col-lg-3 text-center"><i class="material-icons d-block">directions_walk</i><span class="d-block">7 hours 4 mins</span><span class="d-block">8 km</span><input type="radio" class="mt-3" name="mode" value = "walking"></div>
+                                </div>    
+                            </div>
+                            <div class="modal-footer"><button class="btn btn-primary" type="button" data-dismiss="modal">Save</button></div>
                         </form>
                     </div>
-                    <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
                 </div>
             </div>
         </div>
-    </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-</body>
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4-QOWTvatTe_46i2XOI6tXUIx40hHVQY&libraries=places&callback=initMap"
+        async defer></script>
+        <script>
+            function initMap(){
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: 28.7041, lng: 77.1025},
+                    zoom: 13
+                });
+
+                var input = document.getElementById('event_location');
+                var autocomplete = new google.maps.places.Autocomplete(input);
+                autocomplete.setFields(
+                    ['address_components', 'geometry', 'name']);
+
+                autocomplete.addEventListener('place_changed', function(){
+                    var place = autocomplete.getPlace();
+                    if(!place.geometry){
+                        window.alert("No details available for input: " + place.name);
+                        return; 
+                    }
+                })
+            }
+        </script>-->
+        <script src="scripts/new-event-script.js"></script>
+        <!--<script>
+            $(function(){
+                mapboxgl.accessToken = 'pk.eyJ1Ijoic2F1cmFiaG1hcGtpbmciLCJhIjoiY2tiYTRyNjUxMDBqajJybHNsN3JrbjhuMCJ9.TsfUcriDriIF3TI5M-NHSA';
+                var map = new mapboxgl.Map({
+                    container: 'map',
+                    style: 'mapbox://styles/mapbox/streets-v11',
+                    center: [77.233686, 28.665568],
+                    zoom: 10
+                });
+                var canvas = map.getCanvasContainer();
+                var startingPoint = [], destinationPoint = [];
+
+                var destination = document.getElementById('event_location');
+                var destination_list = document.getElementById('event_location_list');
+
+                var start = document.getElementById('start_location');
+                var start_list = document.getElementById('start_location_list');
+
+                destination.addEventListener('keyup', function(){
+                    if(destination.value == ""){
+                        destination_list.innerHTML = "";
+                    }
+                    else{
+                        $.getJSON("https://api.mapbox.com/geocoding/v5/mapbox.places/" + destination.value + ".json?access_token=pk.eyJ1Ijoic2F1cmFiaG1hcGtpbmciLCJhIjoiY2tiYTRyNjUxMDBqajJybHNsN3JrbjhuMCJ9.TsfUcriDriIF3TI5M-NHSA", function(result){
+                            var features = result.features;  //an array 
+                            destination_list.innerHTML = "";
+                            features.forEach(place =>{
+                                var li = document.createElement("li");
+                                li.className = "list-group-item list-group-item-action";
+                                li.setAttribute("onclick", "setDestination(event)");
+                                li.textContent = place.place_name; 
+                                destination_list.appendChild(li);
+                                //console.log(place)
+                                //var geo = place.geometry; 
+                                //var coord = geo.coordinates; 
+                                //console.log("lat: " + coord[0] + ", long: " + coord[1])
+                            })
+                        })
+                    }
+                })
+
+                start.addEventListener('keyup', function(){
+                    if(start.value == ""){
+                        start_list.innerHTML = "";
+                    }
+                    else{
+                        $.getJSON("https://api.mapbox.com/geocoding/v5/mapbox.places/" + start.value + ".json?access_token=pk.eyJ1Ijoic2F1cmFiaG1hcGtpbmciLCJhIjoiY2tiYTRyNjUxMDBqajJybHNsN3JrbjhuMCJ9.TsfUcriDriIF3TI5M-NHSA", function(result){
+                            var features = result.features;  //an array 
+                            start_list.innerHTML = "";
+                            features.forEach(place =>{
+                                var li = document.createElement("li");
+                                li.className = "list-group-item list-group-item-action";
+                                li.setAttribute("onclick", "setStart(event)");
+                                li.textContent = place.place_name; 
+                                start_list.appendChild(li);
+                            })
+                        })
+                    }
+                })
+
+                window.setDestination = function(event){
+                    destination.value = event.target.textContent;
+                    destination_list.innerHTML = "";
+                    $.getJSON("https://api.mapbox.com/geocoding/v5/mapbox.places/" + destination.value + ".json?access_token=pk.eyJ1Ijoic2F1cmFiaG1hcGtpbmciLCJhIjoiY2tiYTRyNjUxMDBqajJybHNsN3JrbjhuMCJ9.TsfUcriDriIF3TI5M-NHSA", function(result){
+                        //console.log(result)
+                        var features = result.features;
+                        var place = features[0];
+                        var geo = place.geometry; 
+                        var coord = geo.coordinates; 
+                        console.log("lat: " + coord[0] + ", long: " + coord[1])
+                        destinationPoint = [];
+                        destinationPoint.push(coord[0]);
+                        destinationPoint.push(coord[1]);
+                        console.log(destinationPoint)
+                    })    
+                }
+
+                window.setStart = function(event){
+                    start.value = event.target.textContent;
+                    start_list.innerHTML = "";
+                    $.getJSON("https://api.mapbox.com/geocoding/v5/mapbox.places/" + start.value + ".json?access_token=pk.eyJ1Ijoic2F1cmFiaG1hcGtpbmciLCJhIjoiY2tiYTRyNjUxMDBqajJybHNsN3JrbjhuMCJ9.TsfUcriDriIF3TI5M-NHSA", function(result){
+                        var features = result.features;
+                        var place = features[0];
+                        var geo = place.geometry; 
+                        var coord = geo.coordinates; 
+                        console.log("lat: " + coord[0] + ", long: " + coord[1])
+                        startingPoint = [];
+                        startingPoint.push(coord[0]);
+                        startingPoint.push(coord[1]);
+                        console.log(startingPoint)
+                    })
+                }
+
+                window.getRoute = function(){
+                    var url = 'https://api.mapbox.com/directions/v5/mapbox/cycling/' + startingPoint[0] + ',' + startingPoint[1] + ';' + destinationPoint[0] + ',' + destinationPoint[1] + '?steps=true&geometries=geojson&access_token=pk.eyJ1Ijoic2F1cmFiaG1hcGtpbmciLCJhIjoiY2tiYTRyNjUxMDBqajJybHNsN3JrbjhuMCJ9.TsfUcriDriIF3TI5M-NHSA';
+                    var req = new XMLHttpRequest();
+                    req.open('GET', url, true);
+                    req.onload = function() {
+                        var json = JSON.parse(req.response);
+                        var data = json.routes[0];
+                        var route = data.geometry.coordinates;
+                        var geojson = {
+                            type: 'Feature',
+                            properties: {},
+                            geometry: {
+                                type: 'LineString',
+                                coordinates: route
+                            }
+                        };
+                        // if the route already exists on the map, reset it using setData
+                        if (map.getSource('route')) {
+                            map.getSource('route').setData(geojson);
+                        } else { // otherwise, make a new request
+                            map.addLayer({
+                                id: 'route',
+                                type: 'line',
+                                source: {
+                                    type: 'geojson',
+                                    data: {
+                                            type: 'Feature',
+                                            properties: {},
+                                            geometry: {
+                                            type: 'LineString',
+                                            coordinates: geojson
+                                        }
+                                    }
+                                },
+                                layout: {
+                                    'line-join': 'round',
+                                    'line-cap': 'round'
+                                },
+                                paint: {
+                                    'line-color': '#3887be',
+                                    'line-width': 5,
+                                    'line-opacity': 0.75
+                                }
+                            });
+                        }
+
+                        //icon for starting point 
+                        /*map.addLayer({
+                            id: 'start_point',
+                            type: 'circle',
+                            source: {
+                                type: 'geojson',
+                                data: {
+                                    type: 'FeatureCollection',
+                                    features: [{
+                                        type: 'Feature',
+                                        properties: {},
+                                        geometry: {
+                                            type: 'Point',
+                                            coordinates: startingPoint
+                                        }
+                                    }]
+                                }
+                            },
+                            paint: {
+                                'circle-radius': 10,
+                                'circle-color': '#3887be'
+                            }
+                        });
+
+                        //icon for end point 
+                        map.addLayer({
+                            id: 'end_point',
+                            type: 'circle',
+                            source: {
+                                type: 'geojson',
+                                data: {
+                                    type: 'FeatureCollection',
+                                    features: [{
+                                        type: 'Feature',
+                                        properties: {},
+                                        geometry: {
+                                            type: 'Point',
+                                            coordinates: destinationPoint
+                                        }
+                                    }]
+                                }
+                            },
+                            paint: {
+                                'circle-radius': 10,
+                                'circle-color': '#3887be'
+                            }
+                        });*/
+                        // add turn instructions here at the end
+                    };
+                    req.send();
+                }
+            })  
+        </script>-->
+        
+    </body>
 
 </html>
