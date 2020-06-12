@@ -14,7 +14,7 @@ $(function(){
     }
     error:function(req,res){
       alert("login unsuccessful");
-      var link=__dirname+'/login';
+      var link=__dirname+'/routes/'+'/login';
       window.location.href=link;
     }
   });
