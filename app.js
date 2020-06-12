@@ -11,21 +11,21 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-
 //connecting mongodb
 mongoose.connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => console.log('Mongodb connected...'))
     .catch(err => console.log(`Error: ${err}`));
 
-app.use(session(
-    {
-        secret: 'secret',
-        resave :false,
-         saveUninitialized :false
-      }));
+app.use(session({
+    secret: 'secret',
+    resave :false,
+    saveUninitialized :false
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+
 //setting up port 
 const port = process.env.PORT || 5000
 

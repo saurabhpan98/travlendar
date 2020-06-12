@@ -12,7 +12,7 @@ router.get('/login', forwardAuthenticated , function(req, res){
     res.redirect('/profile');
   }
   else{
-    res.sendFile(__dirname+'/login');
+    res.sendFile(__dirname+'/public/login.html');
   }
 })
 
