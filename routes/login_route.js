@@ -7,7 +7,7 @@ var User = require('../model/user');
 
 var { forwardAuthenticated } = require('../config/auth');
 
-router.get('/login', forwardAuthenticated , function(req, res){
+router.get('/login.html', forwardAuthenticated , function(req, res){
   if(req.user){
     res.redirect('/profile');
   }

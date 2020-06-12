@@ -12,6 +12,10 @@ router.use(bodyParser.urlencoded({extended: true}));
 
 var User = require('../model/user');
 
+router.get('/signup.html', (req, res) =>{
+  res.sendFile('__dirname' + '/public/signup.html');
+})
+
 router.post('/signup', function(req, res){
     var newUser = new User({
         name    :req.body.name,
@@ -27,7 +31,7 @@ router.post('/signup', function(req, res){
           throw err;
         newUser.password = hash;
         newUser.save().then(function(result){
-        res.redirect('/login');
+          res.redirect('/login');
         }).catch(function(err){
           console.log(err)
         })

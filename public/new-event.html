@@ -112,6 +112,7 @@
 
                 autocomplete.addListener('place_changed', function(){
                     var place = autocomplete.getPlace();
+                    console.log(place)
                     if(!place.geometry){
                         window.alert("No details available for input: " + place.name);
                         return; 
