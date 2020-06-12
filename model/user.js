@@ -3,7 +3,7 @@ var mongoose=require("mongoose");
 var userSchema=new mongoose.Schema({
   username:{
     type:String,
-    required:true;
+    required:true
   },
   name:{
     type:String,
@@ -12,7 +12,7 @@ var userSchema=new mongoose.Schema({
   phone:{
     type:Number,
     required:true
-  }
+  },
   password:{
     type:String,
     required:true
