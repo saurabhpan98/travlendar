@@ -2,20 +2,16 @@ var mongoose=require("mongoose");
 
 var userSchema=new mongoose.Schema({
   username:{
-    type:String,
-    required:true
+    type:String
   },
   name:{
-    type:String,
-    required:true
+    type:String
   },
   phone:{
-    type:Number,
-    required:true
+    type:Number
   },
   password:{
-    type:String,
-    required:true
+    type:String
   }
 });
 
