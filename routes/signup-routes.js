@@ -21,21 +21,56 @@ router.post('/signup', function(req, res){
         name    :req.body.name,
         phone   :req.body.phone,
         username:req.body.username,
-        password:req.body.password,
+        password:req.body.password
       
     });
-  
-    bcrypt.genSalt(10, function(err, salt){
-      bcrypt.hash(newUser.password, salt, function(err, hash){
-        if(err)
-          throw err;
-        newUser.password = hash;
-        newUser.save().then(function(result){
-          res.redirect('/login');
-        }).catch(function(err){
-          console.log(err)
-        })
+
+    /*User.findOne({username: newUser.username})
+      .then(user => {
+        if(!user){  //user not present 
+          newUser.save()
+            .then(function(result){
+            //res.redirect('/login');
+              res.json({message: 'Signup successful. Go to login', success: true});
+            }).catch(function(err){
+              res.json({message: 'Signup not successful', success: false});
+            })
+        }
+        else{  //user already present
+           res.json({message: 'user already present', success: false});
+        }
       })
-    })
+      .catch(error => {
+        res.json({message: error, success: false});
+      })*/
+
+    User.findOne({username: newUser.username})
+      .then(user => {
+        if(!user){  //user not present 
+          bcrypt.genSalt(10, function(err, salt){
+            bcrypt.hash(newUser.password, salt, function(err, hash){
+              if(err)
+                //throw err;  s
+                console.log(err)
+              newUser.password = hash;
+              newUser.save()
+                .then(function(result){
+                //res.redirect('/login');
+                  res.json({message: 'Signup successful. Go to login', success: true});
+                }).catch(function(err){
+                  console.log(err)
+                  res.json({message: 'Signup not successful', success: false});
+                })
+            })
+          })
+          
+        }
+        else{  //user already present
+           res.json({message: 'user already present', success: false});
+        }
+      })
+      .catch(error => {
+        res.json({message: error, success: false});
+      })
   })
 module.exports = router;
