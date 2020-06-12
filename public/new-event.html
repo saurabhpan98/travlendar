@@ -35,10 +35,10 @@
         </nav>
         <div class="container pb-5 mb-5">
             <h2 class="mt-5 mb-3">New event</h2>
-            <input type="text" class="text-center form-control mb-3" placeholder="Event name" name="event_name" id="event_name">
-            <div class="row mt-3">
-                <div class="col-lg-5">
-                    <form id = "event_form">
+            <form id = "event_form">
+                <input type="text" class="text-center form-control mb-3" placeholder="Event name" name="event_name" id="event_name" required />
+                <div class="row mt-3">
+                    <div class="col-lg-5">
                         <div class="form-row my-2">
                             <div class="col-lg-3 my-2"><label class="col-form-label">From</label></div>
                             <div class="col-lg-5"><input class="form-control my-2" type="date" name = "from_date" required /></div>
@@ -49,32 +49,30 @@
                             <div class="col-lg-5 my-2"><input class="form-control" type="date" name = "until_date" required /></div>
                             <div class="col-lg-4 my-2"><input class="form-control" type="time" name = "until_time" required /></div>
                         </div>
-                        <div class="form-row py-3">
-                            <div class="col-lg-3"><label class="col-form-label">Event location</label></div>
-                            <div class="col-lg-9"><input class="form-control" type="text" placeholder="Event location" name="event_location" id="event_location" required /><ul class = "pr-2 w-100 list-group position-absolute" style="z-index: 9999;" id = "event_location_list"></ul></div>
+                        <div class="form-row my-3">
+                            <div class="col-lg-3 my-2"><label class="col-form-label">Event</label></div>
+                            <div class="col-lg-9 d-flex my-2"><i class="material-icons mt-2 mr-2 text-danger">place</i><input class="form-control" type="text" placeholder="Event location" name="event_location" id="event_location" required /></div>
                         </div>
-                        <div class="form-row py-3">
-                            <div class="col-lg-3"><label class="col-form-label">Start location</label></div>
-                            <div class="col-lg-9"><input class="form-control" type="text" placeholder="Start location" name="start_location" id="start_location" required /><ul class = "pr-2 w-100 list-group position-absolute" style="z-index: 9999;" id = "start_location_list"></ul></div>
+                        <div class="form-row my-3">
+                            <div class="col-lg-3 my-2"><label class="col-form-label">Start</label></div>
+                            <div class="col-lg-9 d-flex my-2"><i class="material-icons mt-2 mr-2 text-primary">my_location</i><input class="form-control" type="text" placeholder="Start location" name="start_location" id="start_location" required /></div>
                         </div>
                         <div class="form-row">
                             <div class="col-lg-3 my-2"><label class="col-form-label">Departure&nbsp;</label></div>
                             <div class="col-lg-5 my-2"><input class="form-control" type="date" name = "departure_date"></div>
                             <div class="col-lg-4 my-2"><input class="form-control" type="time" name = "departure_time"></div>
-                        </div><button class="btn btn-outline-primary btn-block mt-3" type="button" data-target="#mode_modal" data-toggle="modal">Choose transportation mode</button>
-                    </form>
+                        </div>
+                        <button class="btn btn-outline-primary btn-block mt-3" type="button" data-target="#mode_modal" data-toggle="modal">Choose transportation mode</button>
+                        
+                    </div>
+                    <div class="col-lg-7" id="map">
+                        
+                    </div>
                 </div>
-                <div class="col" id="map">
-                    
-                </div>
-            </div>
-            <textarea class="form-control my-4 text-center" name="note" placeholder="Add extra note (optional)" id="extra_note"></textarea>
-            <div id="show_alert" class="">
-                
-            </div>
-            <button class="btn btn-primary float-right" type="button" id="event_submit">Save event</button>
-            <a href="profile.html" class="btn btn-outline-danger float-right mr-3" type="button">Cancel</a>
-            
+                <textarea class="form-control my-4 text-center" name="note" placeholder="Add extra note (optional)" id="extra_note"></textarea>
+                <button class="btn btn-primary float-right" type="submit" id="event_submit">Save event</button>
+                <a href="profile.html" class="btn btn-outline-danger float-right mr-3" type="button">Cancel</a>
+            </form>
             
             <div class="modal fade" role="dialog" tabindex="-1" id="mode_modal" aria-labelledby="modeModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -85,13 +83,13 @@
                         <form id = "transportation_mode_form">
                             <div class="modal-body">
                                 <div class="form-row">
-                                    <div class="col-lg-3 text-center"><i class="material-icons d-block">train</i><span class="d-block">3 hours 2 mins</span><span class="d-block">5 km&nbsp;</span><input type="radio" class="mt-3" name="mode" value = "train"></div>
-                                    <div class="col-lg-3 text-center"><i class="material-icons d-block">directions_car</i><span class="d-block">2 hours</span><span class="d-block">3 km</span><input type="radio" class="mt-3" name="mode" value = "car"></div>
-                                    <div class="col-lg-3 text-center"><i class="material-icons d-block">motorcycle</i><span class="d-block">3 hours</span><span class="d-block">4 km</span><input type="radio" class="mt-3" name="mode" value = "bike"></div>
-                                    <div class="col-lg-3 text-center"><i class="material-icons d-block">directions_walk</i><span class="d-block">7 hours 4 mins</span><span class="d-block">8 km</span><input type="radio" class="mt-3" name="mode" value = "walking"></div>
+                                    <div class="col-lg-3 text-center"><i class="material-icons d-block">train</i><span class="d-block border border rounded">3 hours 2 mins, 5 km</span><input type="radio" class="mt-3" name="mode" value = "train"></div>
+                                    <div class="col-lg-3 text-center"><i class="material-icons d-block">directions_car</i><span class="d-block border border rounded">2 hours, 3 km</span><input type="radio" class="mt-3" name="mode" value = "car"></div>
+                                    <div class="col-lg-3 text-center"><i class="material-icons d-block">motorcycle</i><span class="d-block border border rounded">3 hours, 4 km</span><input type="radio" class="mt-3" name="mode" value = "bike"></div>
+                                    <div class="col-lg-3 text-center"><i class="material-icons d-block">directions_walk</i><span class="d-block border border rounded">7 hours 4 mins, 8 km</span><input type="radio" class="mt-3" name="mode" value = "walking"></div>
                                 </div>    
                             </div>
-                            <div class="modal-footer"><button class="btn btn-primary" type="button" data-dismiss="modal">Save</button></div>
+                            <div class="modal-footer"><button class="btn btn-primary btn-block" type="button" data-dismiss="modal">Save mode</button></div>
                         </form>
                     </div>
                 </div>
@@ -99,13 +97,13 @@
         </div>
         <script src="assets/js/jquery.min.js"></script>
         <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-        <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4-QOWTvatTe_46i2XOI6tXUIx40hHVQY&libraries=places&callback=initMap"
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4-QOWTvatTe_46i2XOI6tXUIx40hHVQY&libraries=places&callback=initMap"
         async defer></script>
         <script>
             function initMap(){
                 var map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: 28.7041, lng: 77.1025},
-                    zoom: 13
+                    zoom: 11
                 });
 
                 var input = document.getElementById('event_location');
@@ -121,7 +119,7 @@
                     }
                 })
             }
-        </script>-->
+        </script>
         <script src="scripts/new-event-script.js"></script>
         <!--<script>
             $(function(){
