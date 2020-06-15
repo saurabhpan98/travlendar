@@ -2,14 +2,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const passport =require('passport');
-const LocalStrategy =require('passport-local'); 
+const LocalStrategy =require('passport-local');
 const session = require('express-session');
 const flash = require('connect-flash');
 const db = require('./config/keys').mongoURI;
 require('./config/passport')(passport);
 const app = express();
+const keys=require('./config/keys'); //for database key to be secure
 
-//setting up static files 
+
+//setting up static files
 app.use(express.static('public'));
 
 //using bodyparser
@@ -31,7 +33,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-//setting up port 
+//setting up port
 const port = process.env.PORT || 5000
 
 
@@ -39,6 +41,7 @@ const port = process.env.PORT || 5000
 app.use('/', require('./routes/main-routes.js'));
 app.use('/', require('./routes/login_route.js'));
 app.use('/', require('./routes/signup-routes.js'));
+app.use('/', require('./routes/google.js'));
 
-//listening to server 
-app.listen(port, () => console.log(`App running on port ${port}`)) 
+//listening to server
+app.listen(port, () => console.log(`App running on port ${port}`))

@@ -13,7 +13,7 @@ router.use(bodyParser.urlencoded({extended: true}));
 var User = require('../model/user');
 
 router.get('/signup.html', (req, res) =>{
-  res.sendFile('__dirname' + '/public/signup.html');
+  res.sendFile(__dirname + '/public/signup.html');
 })
 
 router.post('/signup', function(req, res){
@@ -22,12 +22,12 @@ router.post('/signup', function(req, res){
         phone   :req.body.phone,
         username:req.body.username,
         password:req.body.password
-      
+
     });
 
     /*User.findOne({username: newUser.username})
       .then(user => {
-        if(!user){  //user not present 
+        if(!user){  //user not present
           newUser.save()
             .then(function(result){
             //res.redirect('/login');
@@ -46,7 +46,7 @@ router.post('/signup', function(req, res){
 
     User.findOne({username: newUser.username})
       .then(user => {
-        if(!user){  //user not present 
+        if(!user){  //user not present
           bcrypt.genSalt(10, function(err, salt){
             bcrypt.hash(newUser.password, salt, function(err, hash){
               if(err)
@@ -63,7 +63,7 @@ router.post('/signup', function(req, res){
                 })
             })
           })
-          
+
         }
         else{  //user already present
            res.json({message: 'user already present', success: false});

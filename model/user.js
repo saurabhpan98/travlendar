@@ -12,6 +12,12 @@ var userSchema=new mongoose.Schema({
   },
   password:{
     type:String
+  },
+  googleId:{
+    type:String
+  },
+  thumbnail:{
+    typr:String
   }
 });
 
