@@ -79,7 +79,6 @@ submit.addEventListener('click',()=>{
         else{
           alert = '<div class="alert alert-danger alert-dismissible fade show" role="alert">Signup not successful. Try again. <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
         }
-
         alertBox.innerHTML += alert; 
       }
     })

@@ -106,12 +106,26 @@
                 });
 
                 var input = document.getElementById('event_location');
+                var input1 =document.getElementById('start_location');
                 var autocomplete = new google.maps.places.Autocomplete(input);
                 autocomplete.setFields(
                     ['address_components', 'geometry', 'name']);
+                
+
 
                 autocomplete.addListener('place_changed', function(){
                     var place = autocomplete.getPlace();
+                    console.log(place)
+                    if(!place.geometry){
+                        window.alert("No details available for input: " + place.name);
+                        return; 
+                    }
+                })
+                var autocomplete1 = new google.maps.places.Autocomplete(input1);
+                autocomplete1.setFields(
+                    ['address_components', 'geometry', 'name']);
+                autocomplete1.addListener('place_changed', function(){
+                    var place = autocomplete1.getPlace();
                     console.log(place)
                     if(!place.geometry){
                         window.alert("No details available for input: " + place.name);
