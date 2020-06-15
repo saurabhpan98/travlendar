@@ -5,6 +5,7 @@ var mongoose =require('mongoose');
 var passport =require('passport');
 var bcrypt = require('bcryptjs');
 var LocalStrategy = require("passport-local");
+const path = require('path');
 
 
 router.use(bodyParser.json());
@@ -12,8 +13,11 @@ router.use(bodyParser.urlencoded({extended: true}));
 
 var User = require('../model/user');
 
-router.get('/signup.html', (req, res) =>{
-  res.sendFile(__dirname + '/public/signup.html');
+router.get('/signup', (req, res) =>{
+  if(req.user)
+    res.redirect('/profile');
+  else
+    res.sendFile('public/signup.html', {root: path.dirname(__dirname)});
 })
 
 router.post('/signup', function(req, res){

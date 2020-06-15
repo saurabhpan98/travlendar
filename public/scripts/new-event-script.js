@@ -30,3 +30,18 @@ function showError(error){
 }
 
 getLocation();
+
+//submitting form 
+function formSubmit(){
+    event.preventDefault();
+    var transportation_mode_form = document.getElementById('transportation_mode_form');
+    var mode = transportation_mode_form.mode.value; 
+    if(mode == ""){
+        $(function(){
+            $('.toast').toast('show');
+        })
+    }
+    else{
+        alert('Form submitted');
+    }
+}
