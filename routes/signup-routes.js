@@ -25,8 +25,9 @@ router.post('/signup', function(req, res){
         name    :req.body.name,
         phone   :req.body.phone,
         username:req.body.username,
-        password:req.body.password
-
+        password:req.body.password,
+        googleId: "",
+        thumbnail: ""
     });
 
     /*User.findOne({username: newUser.username})
