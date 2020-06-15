@@ -1,19 +1,16 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
+const path = require('path');
 
 //models
 var User = require('../model/user');
 
 var { forwardAuthenticated } = require('../config/auth');
 
-router.get('/login.html', forwardAuthenticated , function(req, res){
-  if(req.user){
-    res.redirect('/profile.html');
-  }
-  else{
-    res.sendFile(__dirname+'/public/login.html');
-  }
+router.get('/login', forwardAuthenticated , function(req, res){
+  //login
+  res.sendFile('public/login.html', {root: path.dirname(__dirname)})
 })
 
 router.post('/login', function(req, res, next) {
