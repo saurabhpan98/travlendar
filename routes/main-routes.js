@@ -12,5 +12,10 @@ router.get('/about.html', (req, res) =>{
 router.get('/team.html', (req, res) =>{
     res.sendFile('__dirname' + '/public/team.html');
 })
-
+router.get('/profile.html',(req,res) =>{
+    if(req.user){
+        res.sendFile('__dirname' + '/public/profile.html');
+    }
+    else res.redirect('/login.html');
+});
 module.exports = router;
