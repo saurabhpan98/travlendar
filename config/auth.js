@@ -5,6 +5,6 @@ module.exports = {
         return next();
       }
      
-      res.redirect('/profile.html');
+      res.redirect('/profile');
     }
   };
