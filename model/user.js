@@ -17,7 +17,7 @@ var userSchema=new mongoose.Schema({
     type:String
   },
   thumbnail:{
-    typr:String
+    type:String
   }
 });
 
