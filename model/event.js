@@ -13,9 +13,6 @@ var eventSchema=new mongoose.Schema({
   meetingStartTime:{
     type:String
   },
-  meetingEndDate:{
-    type:Date
-  },
   meetingEndTime:{
     type:String
   },

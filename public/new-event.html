@@ -100,13 +100,13 @@
                     event: form.event.value,
                     meetingStartDate: form.meetingStartDate.value,
                     meetingStartTime: form.meetingStartTime.value,
-                    meetingEndDate: form.meetingEndDate.value,
                     meetingEndTime: form.meetingEndTime.value,
                     location: form.location.value,
                     extraInfo: form.extraInfo.value 
                 }
                 axios.post("/new-event", newevent)
                     .then(response =>{
+                        console.log(response.data.conflictMeetings);
                         alert(response.data.message);
                         //console.log(response.data.message)
                     })
