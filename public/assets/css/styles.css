@@ -1,6 +1,10 @@
-.login-form, .signup-form {
+.login-form, .signup-form, .social-login {
   max-width: 400px;
   margin: 10px auto;
+}
+
+.social-login {
+  height: 100%;
 }
 
 /*--navbar --*/
