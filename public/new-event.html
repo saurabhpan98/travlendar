@@ -11,7 +11,8 @@
         
         <script src='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js'></script>
         <link href='https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css' rel='stylesheet' />
-    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
         <style>
             #event_form{
                 max-width: 600px;
@@ -41,22 +42,22 @@
         <div class="container pb-5 mb-5">
             <form id = "event_form" onsubmit="formSubmit()">
                 <h2 class="mt-5 mb-4">New event</h2>
-                <input type="text" class="text-center form-control mb-3" placeholder="Event name" name="event_name" id="event_name" required />
+                <input type="text" class="text-center form-control mb-3" placeholder="Event name" name="event" id="event" required />
                 <div class="row mb-3">
                     <div class="col-sm-3 my-2"><label class="col-form-label">From</label></div>
-                    <div class="col-sm-5"><input class="form-control my-2" type="date" name = "from_date" required /></div>
-                    <div class="col-sm-4 my-2"><input class="form-control" type="time" name = "from_time" required /></div>
+                    <div class="col-sm-5"><input class="form-control my-2" type="date" name = "meetingStartDate" required /></div>
+                    <div class="col-sm-4 my-2"><input class="form-control" type="time" name = "meetingStartTime" required /></div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-sm-3 my-2"><label class="col-form-label">Until</label></div>
-                    <div class="col-sm-5 my-2"><input class="form-control" type="date" name = "until_date" required /></div>
-                    <div class="col-sm-4 my-2"><input class="form-control" type="time" name = "until_time" required /></div>
+                    <div class="col-sm-5 my-2"><input class="form-control" type="date" name = "meetingEndDate" required /></div>
+                    <div class="col-sm-4 my-2"><input class="form-control" type="time" name = "meetingEndTime" required /></div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-lg-3 my-2"><label class="col-form-label">Event location</label></div>
-                    <div class="col-lg-9 d-flex my-2"><i class="material-icons mt-2 mr-2 text-danger">place</i><input class="form-control" type="text" placeholder="Event location" name="event_location" id="event_location" required /></div>
+                    <div class="col-lg-9 d-flex my-2"><i class="material-icons mt-2 mr-2 text-danger">place</i><input class="form-control" type="text" placeholder="Event location" name="location" id="location" required /></div>
                 </div>
-                <textarea class="form-control mb-4 text-center" name="note" placeholder="Add extra note (optional)" id="extra_note"></textarea>
+                <textarea class="form-control mb-4 text-center" name="extraInfo" placeholder="Add extra note (optional)" id="extraInfo"></textarea>
                 <div class="row">
                     <div class="col-6">
                         <a href="/profile" class="btn btn-outline-danger btn-block" type="button">Cancel</a>
@@ -74,7 +75,7 @@
         <script>
             function initMap(){
 
-                var input = document.getElementById('event_location');
+                var input = document.getElementById('location');
 
                 var autocomplete = new google.maps.places.Autocomplete(input);
                 autocomplete.setFields(
@@ -89,6 +90,29 @@
                         return; 
                     }
                 })
+            }
+        </script>
+        <script>
+            function formSubmit(){
+                event.preventDefault();
+                let form = event.target;
+                let newevent = {
+                    event: form.event.value,
+                    meetingStartDate: form.meetingStartDate.value,
+                    meetingStartTime: form.meetingStartTime.value,
+                    meetingEndDate: form.meetingEndDate.value,
+                    meetingEndTime: form.meetingEndTime.value,
+                    location: form.location.value,
+                    extraInfo: form.extraInfo.value 
+                }
+                axios.post("/new-event", newevent)
+                    .then(response =>{
+                        alert(response.data.message);
+                        //console.log(response.data.message)
+                    })
+                    .catch(err =>{
+                        console.log(err)
+                    })
             }
         </script>
         <script src="scripts/new-event-script.js"></script>

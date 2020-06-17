@@ -1,13 +1,16 @@
 var mongoose=require('mongoose');
 
 var eventSchema=new mongoose.Schema({
+  userId: {
+    type: String,
+  },
   event:{
     type:String
   },
-  meetingDate:{
+  meetingStartDate:{
     type:Date
   },
-  meetingTime:{
+  meetingStartTime:{
     type:String
   },
   meetingEndDate:{
@@ -17,7 +20,7 @@ var eventSchema=new mongoose.Schema({
     type:String
   },
   location:{
-    type: [Number], index: { type: '2dsphere', sparse: true}
+    type: String
   },
   extraInfo:{
     type:String
