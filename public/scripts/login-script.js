@@ -1,3 +1,10 @@
+/*window.onload = function(){
+  if(navigator.onLine)
+    alert('Online')
+  else
+    alert('Offline')
+}*/
+
 
 var form = document.getElementById("login-form");
 function submitForm(){
