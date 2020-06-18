@@ -17,7 +17,8 @@ router.get('/signup', (req, res) =>{
   if(req.user)
     res.redirect('/profile');
   else
-    res.sendFile('public/signup.html', {root: path.dirname(__dirname)});
+    res.render('signup', {user: req.user});
+    //res.sendFile('public/signup.html', {root: path.dirname(__dirname)});
 })
 
 router.post('/signup', function(req, res){

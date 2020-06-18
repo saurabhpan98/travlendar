@@ -10,7 +10,8 @@ var { forwardAuthenticated } = require('../config/auth');
 
 router.get('/login', forwardAuthenticated , function(req, res){
   //login
-  res.sendFile('public/login.html', {root: path.dirname(__dirname)})
+  //res.sendFile('public/login.html', {root: path.dirname(__dirname)})
+  res.render('login', {user: req.user});
 })
 
 router.post('/login', function(req, res, next) {
