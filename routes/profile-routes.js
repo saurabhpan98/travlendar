@@ -104,4 +104,8 @@ router.get('/myevents', (req, res) =>{
     }
 })
 
+router.post('/deleteconflicts', (req, res)=>{
+    //delete conflict events
+})
+
 module.exports = router;
