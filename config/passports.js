@@ -19,7 +19,7 @@ passport.deserializeUser(function(id,done){
 
 module.exports=function(passport){
   passport.use(
-    new LocalStrategy({usernameField:'username',passwordField:'password'}(username,password,done)=>{
+    new LocalStrategy({usernameField:'username',passwordField:'password'},(username,password,done)=>{
       /*--- match username ---*/
       User.findOne({username:username}.then(user=>{
         if(!user){
@@ -39,7 +39,7 @@ module.exports=function(passport){
 
 
       })
-      .catch(err =>console.log(err));
+      .catch(err)=>console.log(err) 
     })
   );
 }
