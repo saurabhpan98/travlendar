@@ -5,6 +5,7 @@ const path = require('path');
 
 //require models 
 const Event = require('../model/event.js');
+const { findOneAndDelete } = require('../model/event.js');
 
 router.get('/get-profile', (req, res) =>{
     if(req.user){
@@ -32,8 +33,6 @@ router.post('/new-event', (req, res)=>{
                 var isConflict = false; 
                 events.forEach(event =>{
                     //case 1
-                    console.log(req.body.meetingStartTime+" "+req.body.meetingEndTime);
-                    console.log(event.meetingStartTime+" "+event.meetingEndTime);
                     if(req.body.meetingStartTime <= event.meetingStartTime && req.body.meetingEndTime >= event.meetingStartTime && req.body.meetingEndTime <= event.meetingEndTime){
                         conflictEvents.push(event);
                         isConflict = true;
@@ -106,6 +105,16 @@ router.get('/myevents', (req, res) =>{
 
 router.post('/deleteconflicts', (req, res)=>{
     //delete conflict events
+    let conflicts=req.body.conflicts;
+    
+    conflicts.forEach(conflict =>{
+        Event.findOneAndDelete({_id :conflict},(err)=>{
+            if(err)res.send(err);
+        })
+    })
+    res.json({message : "Events successfully Deleted"});
+
+
 })
 
 module.exports = router;
