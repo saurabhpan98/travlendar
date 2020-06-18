@@ -4,15 +4,18 @@ const mongoose = require('mongoose');
 const passport =require('passport');
 const LocalStrategy =require('passport-local');
 const session = require('express-session');
-const flash = require('connect-flash');
 const db = require('./config/keys').mongoURI;
-require('./config/passport')(passport);
-const app = express();
+const ejs = require('ejs');
 const keys=require('./config/keys'); //for database key to be secure
 
+require('./config/passport')(passport);
+
+const app = express();
 
 //setting up static files
-app.use(express.static('public'));
+app.set('view engine', 'ejs');
+app.use(express.static('views'));
+
 
 //using bodyparser
 app.use(bodyParser.json());

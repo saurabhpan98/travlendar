@@ -17,7 +17,8 @@ router.get('/get-profile', (req, res) =>{
 
 router.get('/new-event', (req, res) =>{
     if(req.user)
-        res.sendFile('public/new-event.html', {root: path.dirname(__dirname)});
+        res.render('new-event', {user: req.user});
+        //res.sendFile('public/new-event.html', {root: path.dirname(__dirname)});
     else
         res.redirect('/login');
 })
@@ -92,7 +93,7 @@ router.get('/myevents', (req, res) =>{
         Event.find({userId: req.user._id})
             .then(events =>{
                 events.sort(function(a,b){return a.meetingStartTime.localeCompare(b.meetingStartTime);});
-                res.json({...events, len: events.length, success: true});
+                res.json({events: events, success: true});
             })
             .catch(err =>{
                 res.json({message: err, success: false});
