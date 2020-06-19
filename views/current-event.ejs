@@ -25,6 +25,16 @@
             bottom: 20px;
             left: 20px;
         }
+        .modes .nav-link{
+            border-radius: 10px;
+            cursor: pointer;
+            padding-top: 13px; 
+        }
+        #panel{
+            position: fixed; 
+            top: 30px;
+            left: 30px;
+        }
     </style>
 </head>
 
@@ -50,15 +60,43 @@
     <div id="map">
 
     </div>
+    <!--<div id="panel" class="rounded shadow-sm">
+
+    </div>-->
 
     <div class="stats-box rounded shadow-sm bg-primary pt-1">
         <div class="p-2 pt-3 bg-white">
             <div class="distance-time">
-                <span class="time text-success" id="time"></span>
-                <span class="distance" id="distance"></span>
+                <span class="time text-success lead" id="time"></span>
+                <span class="distance lead" id="distance"></span>
             </div>
-            <div class="modes">
-    
+            <div class="modes mt-2">
+                <ul class="nav nav-pills mb-2" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" role="tab" aria-selective="true" onclick = "changeMode('DRIVING')">
+                            <i class="material-icons d-block">directions_car</i>
+                            <span>Drive</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-home-tab" data-toggle="pill" role="tab" aria-selective="true" onclick = "changeMode('TRANSIT')">
+                            <i class="material-icons d-block">directions_railway</i>
+                            <span>Train or Bus</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-home-tab" data-toggle="pill" role="tab" aria-selective="true" onclick = "changeMode('BICYCLING')">
+                            <i class="material-icons d-block">directions_bike</i>
+                            <span>Two-wheeler</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-home-tab" data-toggle="pill" role="tab" aria-selective="true" onclick = "changeMode('WALKING')">
+                            <i class="material-icons d-block">directions_run</i>
+                            <span>Walk</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -67,7 +105,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4-QOWTvatTe_46i2XOI6tXUIx40hHVQY&callback=initMap" async defer></script>
     <script>
-        var directionsRenderer, directionsService, start, end, geocoder;
+        var directionsRenderer, directionsService, start, end, geocoder, mode = "DRIVING";
         function initMap() {
             directionsService = new google.maps.DirectionsService();
             directionsRenderer = new google.maps.DirectionsRenderer({
@@ -79,6 +117,7 @@
             }
             var map = new google.maps.Map(document.getElementById('map'), mapOptions);
             directionsRenderer.setMap(map);
+            //directionsRenderer.setPanel(document.getElementById('panel'));
             getLocation();
             geocoder = new google.maps.Geocoder;
         }
@@ -88,7 +127,7 @@
                 {
                     origin: {query: start},
                     destination: {query: end},
-                    travelMode: 'DRIVING', //DRIVING, WALKING, BICYCLING, TRANSIT
+                    travelMode: mode, //DRIVING, WALKING, BICYCLING, TRANSIT
                     provideRouteAlternatives: false
                 },
                 function(response, status) {
@@ -100,7 +139,12 @@
                         document.getElementById('distance').textContent = '(' + distance + ')'; 
                         directionsRenderer.setDirections(response);
                     } else {
-                        window.alert('Directions request failed due to ' + status);
+                        if(status == "ZERO_RESULTS"){
+                            //alert('No route found for this mode...')
+                            document.getElementById('time').textContent = "No route found."; 
+                            document.getElementById('distance').textContent = ""; 
+                        }
+                        //window.alert('Directions request failed due to ' + status);
                     }
                 });
         }
@@ -157,6 +201,11 @@
                     console.log("Unknown error occurred")
                     break; 
             }
+        }
+
+        function changeMode(newMode){
+            mode = newMode; 
+            calculateAndDisplayRoute(directionsService, directionsRenderer);
         }
 
         //getting current event info 
