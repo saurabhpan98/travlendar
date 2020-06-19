@@ -117,4 +117,36 @@ router.post('/deleteconflicts', (req, res)=>{
 
 })
 
+//delete event
+router.post('/delete-event', (req, res) =>{
+    Event.findOneAndDelete({_id: req.body.deleteId})
+        .then(deletedEvent =>{
+            console.log(`Event ${deletedEvent.event} deleted`);
+            res.json({message: 'Event deleted', success: true});
+        })
+        .catch(err =>{
+            console.log(err);
+            res.json({message: err, success: false});
+        })
+})
+
+router.get('/profile/:id', (req, res) =>{
+    //console.log(req.params.id)
+    if(req.user){
+        res.render('current-event', {user: req.user});
+    }
+    else{
+        res.redirect('/login');
+    } 
+})
+
+router.get('/timeline', (req, res) =>{
+    if(req.user){
+        res.render('timeline', {user: req.user});
+    }
+    else{
+        res.redirect('/login');
+    } 
+})
+
 module.exports = router;
