@@ -140,6 +140,21 @@ router.get('/profile/:id', (req, res) =>{
     } 
 })
 
+router.post('/profile/:id', (req, res) =>{
+    if(req.user){
+        Event.findOne({_id: req.params.id})
+            .then(event =>{
+                res.json({event, success: true});
+            })
+            .catch(err =>{
+                res.json({message: err, success: false});
+            })
+    }
+    else{
+        res.redirect('/login');
+    }
+})
+
 router.get('/timeline', (req, res) =>{
     if(req.user){
         res.render('timeline', {user: req.user});
