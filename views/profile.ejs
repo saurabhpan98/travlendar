@@ -105,25 +105,54 @@
                         comingEvents.innerHTML += p;
                     }
                     else{
+                        var today = new Date();
+                        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                        var time = today.getHours() + ":" + today.getMinutes() 
+                        var d = new Date(date + " " + time);   
+                        d.setHours(d.getHours() + 5);
+                        d.setMinutes(d.getMinutes() + 30);
+                        var isodate = d.toISOString();          
                         for(let i = 0; i < events.length; i++){
                             let event = events[i];
-                            let date = event.meetingStartDate.split("T");
-                            let item = `<div class="col-sm-4 my-2">
-                                            <div class="pl-1 bg-primary shadow-sm rounded">
-                                                <div class="p-2 pl-3 bg-white rounded">
-                                                    <h4 class="mb-3">${event.event}</h4>
-                                                    <span class="d-block"><strong>Meeting on:</strong> ${date[0]}</span>
-                                                    <span class="d-block"><strong>Meeting time:</strong> ${event.meetingStartTime} to ${event.meetingEndTime}</span>
-                                                    <span class="d-block mt-3"><strong>Location:</strong> ${event.location}</span>
-                                                    <div class="w-100 d-flex pb-2">
-                                                        <a class="text-center text-primary w-100 material-icons mt-3 mx-2 text-decoration-none" href="/profile/${event._id}" data-toggle="tooltip" data-placement="bottom" title="View event">search</a>
-                                                        <a class="text-center text-dark w-100 material-icons mt-3 mx-2 text-decoration-none" href="#" data-toggle="tooltip" data-placement="bottom" title="Edit event">edit</a>
-                                                        <a class="text-center text-danger w-100 material-icons mt-3 mx-2 text-decoration-none" href="#" data-toggle="tooltip" data-placement="bottom" title="Delete event" onclick="showDeleteModal('${event._id}')">delete</a>
+                            if(event.meetingStartDate>=isodate){
+                               let date = event.meetingStartDate.split("T");
+                               let item = `<div class="col-sm-4 my-2">
+                                                <div class="pl-1 bg-primary shadow-sm rounded">
+                                                    <div class="p-2 pl-3 bg-white rounded">
+                                                        <h4 class="mb-3">${event.event}</h4>
+                                                        <span class="d-block"><strong>Meeting on:</strong> ${date[0]}</span>
+                                                        <span class="d-block"><strong>Meeting time:</strong> ${event.meetingStartTime} to ${event.meetingEndTime}</span>
+                                                        <span class="d-block mt-3"><strong>Location:</strong> ${event.location}</span>
+                                                        <div class="w-100 d-flex pb-2">
+                                                            <a class="text-center text-primary w-100 material-icons mt-3 mx-2 text-decoration-none" href="/profile/${event._id}" data-toggle="tooltip" data-placement="bottom" title="View event">search</a>
+                                                            <a class="text-center text-dark w-100 material-icons mt-3 mx-2 text-decoration-none" href="#" data-toggle="tooltip" data-placement="bottom" title="Edit event">edit</a>
+                                                            <a class="text-center text-danger w-100 material-icons mt-3 mx-2 text-decoration-none" href="#" data-toggle="tooltip" data-placement="bottom" title="Delete event" onclick="showDeleteModal('${event._id}')">delete</a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>`;
-                            comingEvents.innerHTML += item; 
+                                            </div>`;
+                                comingEvents.innerHTML += item; 
+                            }
+                            else{
+                                let date = event.meetingStartDate.split("T");
+                                let item = `<div class="col-sm-4 my-2">
+                                                <div class="pl-1 bg-primary shadow-sm rounded">
+                                                    <div class="p-2 pl-3 bg-white rounded">
+                                                        <h4 class="mb-3">${event.event}</h4>
+                                                        <span class="d-block"><strong>Meeting on:</strong> ${date[0]}</span>
+                                                        <span class="d-block"><strong>Meeting time:</strong> ${event.meetingStartTime} to ${event.meetingEndTime}</span>
+                                                        <span class="d-block mt-3"><strong>Location:</strong> ${event.location}</span>
+                                                        <div class="w-100 d-flex pb-2">
+                                                            <a class="text-center text-primary w-100 material-icons mt-3 mx-2 text-decoration-none" href="/profile/${event._id}" data-toggle="tooltip" data-placement="bottom" title="View event">search</a>
+                                                            <a class="text-center text-dark w-100 material-icons mt-3 mx-2 text-decoration-none" href="#" data-toggle="tooltip" data-placement="bottom" title="Edit event">edit</a>
+                                                            <a class="text-center text-danger w-100 material-icons mt-3 mx-2 text-decoration-none" href="#" data-toggle="tooltip" data-placement="bottom" title="Delete event" onclick="showDeleteModal('${event._id}')">delete</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>`;
+                                pastEvents.innerHTML += item; 
+
+                            }
                         }
                     }
                 }
