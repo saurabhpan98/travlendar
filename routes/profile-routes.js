@@ -61,10 +61,14 @@ router.post('/new-event', (req, res)=>{
                     res.json({message: "Event conflict", success: false,conflictMeetings :conflictEvents});
                 }
                 else{
+                    var d = new Date(req.body.meetingStartDate + " " + req.body.meetingStartTime);
+                    d.setHours(d.getHours() + 5);
+                    d.setMinutes(d.getMinutes() + 30);
+                    var isodate = d.toISOString();
                     new Event({
                         userId: req.user._id,
                         event: req.body.event,
-                        meetingStartDate: req.body.meetingStartDate,
+                        meetingStartDate: isodate,
                         meetingStartTime: req.body.meetingStartTime,
                         meetingEndTime: req.body.meetingEndTime,
                         location: req.body.location,
@@ -91,21 +95,24 @@ router.get('/myevents', (req, res) =>{
     if(req.user){
         Event.find({userId: req.user._id})
             .then(events =>{
+                /*events.sort(function(a,b){
+                    if(a.meetingStartDate<b.meetingStartDate){
+                        return a;
+                    }
+                    else if(a.meetingStartDate>b.meetingStartDate){
+                        return b;
+                    }
+                    else if(a.meetingStartDate==b.meetingStartDate){
+                        return a.meetingStartTime.localeCompare(b.meetingStartTime);
+                    }
+                })*/
                 events.sort(function(a,b){
-                if(a.meetingStartDate<b.meetingStartDate){
-                  return a;
-                }
-                else if(a.meetingStartDate>b.meetingStartDate){
-                  return b;
-                }
-                else if(a.meetingStartDate==b.meetingStartDate){
-                  return a.meetingStartTime.localeCompare(b.meetingStartTime);
-                }
-
-              //  res.json({events: events, success: true});
-            })
+                    // Turn your strings into dates, and then subtract them
+                    // to get a value that is either negative, positive, or zero.
+                    return new Date(a.meetingStartDate) - new Date(b.meetingStartDate);
+                  });
               res.json({events: events, success: true});
-          })
+            })
             .catch(err =>{
                 res.json({message: err, success: false});
             })
