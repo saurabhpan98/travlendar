@@ -20,6 +20,16 @@
             height: 100vh;
             width: 100vw;
         }
+        .stats-box{
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+        }
+        .modes .nav-link{
+            border-radius: 10px;
+            cursor: pointer;
+            padding-top: 13px;
+        }
     </style>
 </head>
 
@@ -44,11 +54,50 @@
     <div id="map">
 
     </div>
+
+    <div class="stats-box rounded shadow-sm bg-primary pt-1">
+        <div class="p-2 pt-3 bg-white">
+            <div class="distance-time">
+                <span class="time text-success lead" id="time"></span>
+                <span class="distance lead" id="distance"></span>
+            </div>
+            <div class="modes mt-2">
+                <ul class="nav nav-pills mb-2" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" role="tab" aria-selective="true" onclick = "changeMode('DRIVING')">
+                            <i class="material-icons d-block">directions_car</i>
+                            <span>Drive</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-home-tab" data-toggle="pill" role="tab" aria-selective="true" onclick = "changeMode('TRANSIT')">
+                            <i class="material-icons d-block">directions_railway</i>
+                            <span>Train or Bus</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-home-tab" data-toggle="pill" role="tab" aria-selective="true" onclick = "changeMode('BICYCLING')">
+                            <i class="material-icons d-block">directions_bike</i>
+                            <span>Two-wheeler</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-home-tab" data-toggle="pill" role="tab" aria-selective="true" onclick = "changeMode('WALKING')">
+                            <i class="material-icons d-block">directions_run</i>
+                            <span>Walk</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4-QOWTvatTe_46i2XOI6tXUIx40hHVQY&libraries=places&callback=initMap" async defer></script>
     <script>
-        var directionsRenderer, directionsService, start, geocoder;
+
+        var directionsRenderer, directionsService, geocoder, destination, origin, mode = "DRIVING";
+        var eventList=[];
         function initMap() {
             directionsService = new google.maps.DirectionsService;
             directionsRenderer = new google.maps.DirectionsRenderer;
@@ -57,21 +106,94 @@
                 center: {lat: 41.85, lng: -87.65}
             });
             directionsRenderer.setMap(map);
+            getLocation();
+            geocoder = new google.maps.Geocoder;
+            //calculateAndDisplayRoute(directionsService, directionsRenderer);
+        }
 
+        function getLocation(){
+            if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            }
+            else{
+                alert("Geolocation is not supported here")
+            }
+        }
+
+        function showPosition(position){
+            var input = position.coords.latitude + "," + position.coords.longitude;
+            var latlngStr = input.split(',', 2);
+            var latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
+            geocoder.geocode({'location': latlng}, function(results, status) {
+                if (status === 'OK') {
+                    if (results[0]) {
+
+                        origin = results[0].formatted_address;
+                        calculateAndDisplayRoute(directionsService, directionsRenderer);
+                    } else {
+                        window.alert('No results found');
+                    }
+                } else {
+                    window.alert('Geocoder failed due to: ' + status);
+                }
+            });
+        }
+
+        function showError(error){
+            switch(error.code){
+                case error.PERMISSION_DENIED:
+                    console.log("User denied request for location")
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    console.log("Location information is unavailable")
+                    break;
+                case error.TIMEOUT:
+                    console.log("Request to get location timed out")
+                    break;
+                case error.UNKNOWN_ERROR:
+                    console.log("Unknown error occurred")
+                    break;
+            }
+        }
+
+        function changeMode(newMode){
+            mode = newMode;
             calculateAndDisplayRoute(directionsService, directionsRenderer);
         }
 
         function calculateAndDisplayRoute(directionsService, directionsRenderer) {
-            var waypts = [
+          $.ajax({
+            type:'GET',
+            async: false,
+            url:'/todays-event',
+            success:function(result){
+              //console.log(result)
+              for(var i=0;i<result.events.length;i++){
+                eventList.push(result.events[i].location);
+              }
+            }
+          })
+          var waypts=[];
+          destination = eventList[eventList.length-1];
+          for(var i=0; i < eventList.length-1; i++){
+            waypts.push({
+              location:eventList[i],
+              stopover:true
+            })
+          }
+          //console.log(waypts)
+
+        //  var waypts=[];
+          /*  var waypts = [
                 {
                     location: "Connaught Place, New Delhi, Delhi, India",
-                    stopover: true 
+                    stopover: true
                 },
                 {
                     location: "Rithala, Rohini, Delhi, India",
-                    stopover: true 
+                    stopover: true
                 }
-            ];
+            ];*/
             /*var checkboxArray = document.getElementById('waypoints');
             for (var i = 0; i < checkboxArray.length; i++) {
                 if (checkboxArray.options[i].selected) {
@@ -82,16 +204,22 @@
                 }
             }*/
 
+
             directionsService.route({
             //origin: document.getElementById('start').value,
             //destination: document.getElementById('end').value,
-                origin: "VVIP Addresses, Raj Nagar Extension, Ghaziabad, Uttar Pradesh, India",
-                destination: "Delhi Technological University, Shahbad Daulatpur Village, Rohini, Delhi, India",
+                origin: origin,
+                destination: destination,
                 waypoints: waypts,
                 optimizeWaypoints: true,
                 travelMode: 'DRIVING'
             }, function(response, status) {
                 if (status === 'OK') {
+                    console.log(response);
+                    var distance = response.routes[0].legs[0].distance.text;
+                    var time = response.routes[0].legs[0].duration.text;
+                    document.getElementById('time').textContent = time;
+                    document.getElementById('distance').textContent = '(' + distance + ')';
                     directionsRenderer.setDirections(response);
                     /*var route = response.routes[0];
                     var summaryPanel = document.getElementById('directions-panel');
@@ -105,7 +233,7 @@
                         summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
                         summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
                     }*/
-                } 
+                }
                 else {
                         window.alert('Directions request failed due to ' + status);
                 }

@@ -46,6 +46,7 @@ app.use('/', require('./routes/login_route.js'));
 app.use('/', require('./routes/signup-routes.js'));
 app.use('/', require('./routes/google.js'));
 app.use('/', require('./routes/profile-routes.js'));
+app.use('/', require('./routes/todays-event.js'));
 
 //listening to server
 app.listen(port, () => console.log(`App running on port ${port}`))
