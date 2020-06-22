@@ -33,11 +33,13 @@ passport.use(
           phone: "",
           password: "",
           googleId: profile.id,
-          thumbnail: (profile._json.image) ? (profile._json.image.url) : ""
+          githubId: "",
+          thumbnail: profile.photos[0].value
         }).save().then((newUser)=> {
           console.log('new user is created');
           done(null,newUser);
         });
+        //console.log(profile)
       }
     })
   }
