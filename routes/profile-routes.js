@@ -70,6 +70,7 @@ router.post('/new-event', (req, res)=>{
                         userId: req.user._id,
                         event: req.body.event,
                         meetingStartDate: isodate,
+                        meetingDate: req.body.meetingStartDate,
                         meetingStartTime: req.body.meetingStartTime,
                         meetingEndTime: req.body.meetingEndTime,
                         location: req.body.location,
@@ -97,8 +98,6 @@ router.get('/myevents', (req, res) =>{
         Event.find({userId: req.user._id})
             .then(events =>{
                 events.sort(function(a,b){
-                    // Turn your strings into dates, and then subtract them
-                    // to get a value that is either negative, positive, or zero.
                     return new Date(a.meetingStartDate) - new Date(b.meetingStartDate);
                   });
               res.json({events: events, success: true});
