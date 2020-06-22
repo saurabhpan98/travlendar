@@ -3,5 +3,9 @@ module.exports = {
     google:{
       clientID:'990341707671-1utjcfr8bidn3d2s6lkbdl40h9peuu4l.apps.googleusercontent.com',
       clientSecret:'0bIRpqPuSw07yVsuLeCtIfWq'
+    },
+    github:{
+      clientID:'acc9f1f7dbc142dd7b73',
+      clientSecret:'3a716c392dced5eac107ece5206f0e89b2a7dc13'
     }
 }
