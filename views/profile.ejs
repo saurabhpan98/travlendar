@@ -5,7 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="icon" type="image/png" href="./images/travlendar-icons-1.png"/>
-    <title>Travlendar / <%= user.name %></title>
+    <title>Travlendar / 
+        <% if(user.name) { %>
+            <%= user.name %>
+        <% } else if(user.googleId != "") { %>
+            <%= user.name %>
+        <% } else { %>
+            <%= user.username %>
+        <% } %>
+    </title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/fonts/material-icons.min.css">
     <link rel="stylesheet" href="assets/css/Navigation-Clean.css">
@@ -23,14 +31,15 @@
     <nav class="navbar navbar-light navbar-expand-md shadow-sm">
         <div class="container-fluid">
             <a class="navbar-brand d-flex" href="/profile">
-                <i class="material-icons mr-2">account_circle</i>
-                <span>
-                    <% if(user.name) { %>
-                        <%= user.name %>
-                    <% } else { %>
-                        <%= user.username %>
-                    <% } %>
-                </span>
+                <% if(user.googleId != "") { %>
+                    <img src = <%= user.thumbnail %> width="30" height="30" class="d-inline-block align-top mr-1" />
+                    <%= user.name %>
+                <% } else if(user.githubId != "") { %>
+                    <img src = <%= user.thumbnail %> width="30" height="30" class="d-inline-block align-top mr-1" />
+                    <%= user.username %>
+                <% } else { %>
+                    <%= user.name %>
+                <% } %>
             </a>
             <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse"
