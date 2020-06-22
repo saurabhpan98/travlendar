@@ -24,7 +24,13 @@
         <div class="container-fluid">
             <a class="navbar-brand d-flex" href="/profile">
                 <i class="material-icons mr-2">account_circle</i>
-                <span><%= user.name %></span>
+                <span>
+                    <% if(user.name) { %>
+                        <%= user.name %>
+                    <% } else { %>
+                        <%= user.username %>
+                    <% } %>
+                </span>
             </a>
             <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse"

@@ -45,6 +45,7 @@ app.use('/', require('./routes/main-routes.js'));
 app.use('/', require('./routes/login_route.js'));
 app.use('/', require('./routes/signup-routes.js'));
 app.use('/', require('./routes/google.js'));
+app.use('/', require('./routes/github.js'));
 app.use('/', require('./routes/profile-routes.js'));
 app.use('/', require('./routes/todays-event.js'));
 
