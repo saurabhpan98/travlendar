@@ -22,8 +22,9 @@
 <body>
     <nav class="navbar navbar-light navbar-expand-md shadow-sm">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/profile">
-                <%= user.name %>
+            <a class="navbar-brand d-flex" href="/profile">
+                <i class="material-icons mr-2">account_circle</i>
+                <span><%= user.name %></span>
             </a>
             <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse"
@@ -100,60 +101,66 @@
                     let pastEvents = document.getElementsByClassName('past-events')[0];
 
                     let events = response.data.events;
-                    if(events.length == 0){
-                        let p = '<p class="lead">No new upcoming events present</p>';
-                        comingEvents.innerHTML += p;
-                    }
-                    else{
-                        var today = new Date();
-                        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-                        var time = today.getHours() + ":" + today.getMinutes() 
-                        var d = new Date(date + " " + time);   
-                        d.setHours(d.getHours() + 5);
-                        d.setMinutes(d.getMinutes() + 30);
-                        var isodate = d.toISOString();          
-                        for(let i = 0; i < events.length; i++){
-                            let event = events[i];
-                            if(event.meetingStartDate>=isodate){
-                               let date = event.meetingStartDate.split("T");
-                               let item = `<div class="col-sm-4 my-2">
-                                                <div class="pl-1 bg-primary shadow-sm rounded">
-                                                    <div class="p-2 pl-3 bg-white rounded">
-                                                        <h4 class="mb-3">${event.event}</h4>
-                                                        <span class="d-block"><strong>Meeting on:</strong> ${date[0]}</span>
-                                                        <span class="d-block"><strong>Meeting time:</strong> ${event.meetingStartTime} to ${event.meetingEndTime}</span>
-                                                        <span class="d-block mt-3"><strong>Location:</strong> ${event.location}</span>
-                                                        <div class="w-100 d-flex pb-2">
-                                                            <a class="text-center text-primary w-100 material-icons mt-3 mx-2 text-decoration-none" href="/profile/${event._id}" data-toggle="tooltip" data-placement="bottom" title="View event">search</a>
-                                                            <a class="text-center text-dark w-100 material-icons mt-3 mx-2 text-decoration-none" href="#" data-toggle="tooltip" data-placement="bottom" title="Edit event">edit</a>
-                                                            <a class="text-center text-danger w-100 material-icons mt-3 mx-2 text-decoration-none" href="#" data-toggle="tooltip" data-placement="bottom" title="Delete event" onclick="showDeleteModal('${event._id}')">delete</a>
-                                                        </div>
+                    var today = new Date();
+                    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+                    var time = today.getHours() + ":" + today.getMinutes() 
+                    var d = new Date(date + " " + time);   
+                    d.setHours(d.getHours() + 5);
+                    d.setMinutes(d.getMinutes() + 30);
+                    var isodate = d.toISOString(); 
+                    
+                    let upComingCount = 0, pastCount = 0;
+                    
+                    for(let i = 0; i < events.length; i++){
+                        let event = events[i];
+                        if(event.meetingStartDate>=isodate){
+                            let date = event.meetingStartDate.split("T");
+                            let item = `<div class="col-sm-4 my-2 h-100"">
+                                            <div class="pl-1 bg-primary shadow-sm rounded">
+                                                <div class="p-2 pl-3 bg-white rounded">
+                                                    <h4 class="mb-3">${event.event}</h4>
+                                                    <span class="d-block"><strong>Meeting on:</strong> ${date[0]}</span>
+                                                    <span class="d-block"><strong>Meeting time:</strong> ${event.meetingStartTime} to ${event.meetingEndTime}</span>
+                                                    <span class="d-block mt-3"><strong>Location:</strong> ${event.location}</span>
+                                                    <div class="w-100 d-flex pb-2">
+                                                        <a class="text-center text-primary w-100 material-icons mt-3 mx-2 text-decoration-none" href="/profile/${event._id}" data-toggle="tooltip" data-placement="bottom" title="View event">search</a>
+                                                        <a class="text-center text-dark w-100 material-icons mt-3 mx-2 text-decoration-none" href="#" data-toggle="tooltip" data-placement="bottom" title="Edit event">edit</a>
+                                                        <a class="text-center text-danger w-100 material-icons mt-3 mx-2 text-decoration-none" href="#" data-toggle="tooltip" data-placement="bottom" title="Delete event" onclick="showDeleteModal('${event._id}')">delete</a>
                                                     </div>
                                                 </div>
-                                            </div>`;
-                                comingEvents.innerHTML += item; 
-                            }
-                            else{
-                                let date = event.meetingStartDate.split("T");
-                                let item = `<div class="col-sm-4 my-2">
-                                                <div class="pl-1 bg-primary shadow-sm rounded">
-                                                    <div class="p-2 pl-3 bg-white rounded">
-                                                        <h4 class="mb-3">${event.event}</h4>
-                                                        <span class="d-block"><strong>Meeting on:</strong> ${date[0]}</span>
-                                                        <span class="d-block"><strong>Meeting time:</strong> ${event.meetingStartTime} to ${event.meetingEndTime}</span>
-                                                        <span class="d-block mt-3"><strong>Location:</strong> ${event.location}</span>
-                                                        <div class="w-100 d-flex pb-2">
-                                                            <a class="text-center text-primary w-100 material-icons mt-3 mx-2 text-decoration-none" href="/profile/${event._id}" data-toggle="tooltip" data-placement="bottom" title="View event">search</a>
-                                                            <a class="text-center text-dark w-100 material-icons mt-3 mx-2 text-decoration-none" href="#" data-toggle="tooltip" data-placement="bottom" title="Edit event">edit</a>
-                                                            <a class="text-center text-danger w-100 material-icons mt-3 mx-2 text-decoration-none" href="#" data-toggle="tooltip" data-placement="bottom" title="Delete event" onclick="showDeleteModal('${event._id}')">delete</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>`;
-                                pastEvents.innerHTML += item; 
-
-                            }
+                                            </div>
+                                        </div>`;
+                            comingEvents.innerHTML += item; 
+                            upComingCount += 1;
                         }
+                        else{
+                            let date = event.meetingStartDate.split("T");
+                            let item = `<div class="col-sm-4 my-2">
+                                            <div class="pl-1 bg-danger shadow-sm rounded">
+                                                <div class="p-2 pl-3 bg-white rounded">
+                                                    <h4 class="mb-3">${event.event}</h4>
+                                                    <span class="d-block"><strong>Meeting on:</strong> ${date[0]}</span>
+                                                    <span class="d-block"><strong>Meeting time:</strong> ${event.meetingStartTime} to ${event.meetingEndTime}</span>
+                                                    <span class="d-block mt-3"><strong>Location:</strong> ${event.location}</span>
+                                                    <div class="w-100 d-flex pb-2">
+                                                        <a class="text-center text-primary w-100 material-icons mt-3 mx-2 text-decoration-none" href="/profile/${event._id}" data-toggle="tooltip" data-placement="bottom" title="View event">search</a>
+                                                        <a class="text-center text-dark w-100 material-icons mt-3 mx-2 text-decoration-none" href="#" data-toggle="tooltip" data-placement="bottom" title="Edit event">edit</a>
+                                                        <a class="text-center text-danger w-100 material-icons mt-3 mx-2 text-decoration-none" href="#" data-toggle="tooltip" data-placement="bottom" title="Delete event" onclick="showDeleteModal('${event._id}')">delete</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>`;
+                            pastEvents.innerHTML += item; 
+                            pastCount += 1;
+                        }
+                    }
+
+                    //do here
+                    if(upComingCount == 0){
+                        comingEvents.innerHTML += '<p class="lead pl-3">No upcoming events present</p>';
+                    }
+                    if(pastCount == 0){
+                        pastEvents.innerHTML += '<p class="lead pl-3">No past events present</p>';
                     }
                 }
                 else{

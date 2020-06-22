@@ -5,18 +5,17 @@ const router = express.Router();
 
 router.get('/todays-event', (req, res) =>{
     if(req.user){
-      var today = new Date();
-      var dd = String(today.getDate()).padStart(2, '0');
-      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-      var yyyy = today.getFullYear();
+        let today = new Date();
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        let yyyy = today.getFullYear();
 
-      today = yyyy + '-' + mm + '-' + dd;
-      //console.log(today)
-        Event.find({userId: req.user._id, meetingStartDate: today})
+        today = yyyy + '-' + mm + '-' + dd;
+
+        Event.find({userId: req.user._id, meetingDate: today})
             .then(events =>{
                 events.sort(function(a,b){
-                    return a.meetingStartTime.localeCompare(b.meetingStartTime);
-
+                    return new Date(a.meetingStartDate) - new Date(b.meetingStartDate);
                 });
                 //console.log(events);
 
