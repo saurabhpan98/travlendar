@@ -61,6 +61,7 @@ router.post('/new-event', (req, res)=>{
                     res.json({message: "Event conflict", success: false,conflictMeetings :conflictEvents});
                 }
                 else{
+                    console.log(req.body.meetingStartDate);
                     var d = new Date(req.body.meetingStartDate + " " + req.body.meetingStartTime);
                     d.setHours(d.getHours() + 5);
                     d.setMinutes(d.getMinutes() + 30);
@@ -95,17 +96,6 @@ router.get('/myevents', (req, res) =>{
     if(req.user){
         Event.find({userId: req.user._id})
             .then(events =>{
-                /*events.sort(function(a,b){
-                    if(a.meetingStartDate<b.meetingStartDate){
-                        return a;
-                    }
-                    else if(a.meetingStartDate>b.meetingStartDate){
-                        return b;
-                    }
-                    else if(a.meetingStartDate==b.meetingStartDate){
-                        return a.meetingStartTime.localeCompare(b.meetingStartTime);
-                    }
-                })*/
                 events.sort(function(a,b){
                     // Turn your strings into dates, and then subtract them
                     // to get a value that is either negative, positive, or zero.
