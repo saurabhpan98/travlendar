@@ -98,10 +98,12 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#changeOriginModal">Change origin</a>
                         <a class="dropdown-item" href="#" onclick="showPanel()">Detailed route</a>
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#changeTimeModal">Different start time</a>
+                        <!--<a class="dropdown-item" href="#" data-toggle="modal" data-target="#changeTimeModal">Different start time</a>-->
                     </div>
                 </div>
             </div>
+            <span id="departure-time" class="d-block" style="display: none;"></span>
+            <span id="free-time" class="d-block" style="display: none;"></span>
             <div class="modes mt-2" style="font-size: 12px;">
                 <ul class="nav nav-pills mb-2" id="pills-tab" role="tablist">
                     <li class="nav-item">
@@ -177,11 +179,18 @@
         </div>
     </div>
 
+    <div id="toast-container" aria-live="polite" aria-atomic="true" style="position: fixed; top: 70px; right: 20px; min-width: 300px; min-height: 200px;">
+        
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4-QOWTvatTe_46i2XOI6tXUIx40hHVQY&libraries=places&callback=initMap" async defer></script>
     <script>
+
+        //$('#x').toast('show');
+
         var map, directionsRenderer, directionsService, dt = new Date(), start, end, geocoder, mode = "DRIVING",meetingStartTime, meetingStartDate;
         function initMap() {
             directionsService = new google.maps.DirectionsService();
@@ -201,78 +210,78 @@
                     {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
                     {
                     featureType: 'administrative.locality',
-                    elementType: 'labels.text.fill',
-                    stylers: [{color: '#d59563'}]
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#d59563'}]
                     },
                     {
                     featureType: 'poi',
-                    elementType: 'labels.text.fill',
-                    stylers: [{color: '#d59563'}]
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#d59563'}]
                     },
                     {
                     featureType: 'poi.park',
-                    elementType: 'geometry',
-                    stylers: [{color: '#263c3f'}]
+                        elementType: 'geometry',
+                        stylers: [{color: '#263c3f'}]
                     },
                     {
                     featureType: 'poi.park',
-                    elementType: 'labels.text.fill',
-                    stylers: [{color: '#6b9a76'}]
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#6b9a76'}]
                     },
                     {
                     featureType: 'road',
-                    elementType: 'geometry',
-                    stylers: [{color: '#38414e'}]
+                        elementType: 'geometry',
+                        stylers: [{color: '#38414e'}]
                     },
                     {
                     featureType: 'road',
-                    elementType: 'geometry.stroke',
-                    stylers: [{color: '#212a37'}]
+                        elementType: 'geometry.stroke',
+                        stylers: [{color: '#212a37'}]
                     },
                     {
                     featureType: 'road',
-                    elementType: 'labels.text.fill',
-                    stylers: [{color: '#9ca5b3'}]
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#9ca5b3'}]
                     },
                     {
                     featureType: 'road.highway',
-                    elementType: 'geometry',
-                    stylers: [{color: '#746855'}]
+                        elementType: 'geometry',
+                        stylers: [{color: '#746855'}]
                     },
                     {
                     featureType: 'road.highway',
-                    elementType: 'geometry.stroke',
-                    stylers: [{color: '#1f2835'}]
+                        elementType: 'geometry.stroke',
+                        stylers: [{color: '#1f2835'}]
                     },
                     {
                     featureType: 'road.highway',
-                    elementType: 'labels.text.fill',
-                    stylers: [{color: '#f3d19c'}]
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#f3d19c'}]
                     },
                     {
                     featureType: 'transit',
-                    elementType: 'geometry',
-                    stylers: [{color: '#2f3948'}]
+                        elementType: 'geometry',
+                        stylers: [{color: '#2f3948'}]
                     },
                     {
                     featureType: 'transit.station',
-                    elementType: 'labels.text.fill',
-                    stylers: [{color: '#d59563'}]
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#d59563'}]
                     },
                     {
                     featureType: 'water',
-                    elementType: 'geometry',
-                    stylers: [{color: '#17263c'}]
+                        elementType: 'geometry',
+                        stylers: [{color: '#17263c'}]
                     },
                     {
                     featureType: 'water',
-                    elementType: 'labels.text.fill',
-                    stylers: [{color: '#515c6d'}]
+                        elementType: 'labels.text.fill',
+                        stylers: [{color: '#515c6d'}]
                     },
                     {
                     featureType: 'water',
-                    elementType: 'labels.text.stroke',
-                    stylers: [{color: '#17263c'}]
+                        elementType: 'labels.text.stroke',
+                        stylers: [{color: '#17263c'}]
                     }
                 ]
             }
@@ -397,22 +406,74 @@
                         var mins= parseInt(meetingStart[0])*60 + parseInt(meetingStart[1]);
                         mins=mins-parseInt(time.value/60);
                         if(mins<curTime&&meetingStartDate===today){
-                            if(curTime-mins<=10)console.log("you are "+curTime-mins+" mins late for meeting");
-                            else if(curTime-mins>10)console.log("you cannot reach at your meeting");
+                            if(curTime-mins<=10){
+                                console.log("you are "+curTime-mins+" mins late for meeting");
+                                let toast1 = `<div class="toast" id="minlate" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000">
+                                                <div class="toast-header">
+                                                    <strong class="mr-auto">Alert!!</strong>
+                                                    <small class="text-muted">just now</small>
+                                                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="toast-body">
+                                                    You are ${curTime-mins} mins late for meeting
+                                                </div>
+                                            </div>`;
+                                document.getElementById('toast-container').innerHTML += toast1;
+                                $("#minLate").toast('show');
+                            }
+                            
+                            else if(curTime-mins>10){
+                                console.log("you cannot reach at your meeting");
+                                let toast2 = `<div class="toast" id="cannotReach" role="alert" aria-live="assertive" aria-atomic="true">
+                                                <div class="toast-header">
+                                                    <strong class="mr-auto">Alert!!</strong>
+                                                    <small class="text-muted">just now</small>
+                                                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="toast-body">
+                                                    You cannot reach at your meeting
+                                                </div>
+                                            </div>`;
+                                document.getElementById('toast-container').innerHTML += toast2;
+                                $("#cannotReach").toast('show'); 
+                            }
                         }
                         else{
                           var departureTime =parseInt(mins/60)+":"+mins%60;
                           console.log(departureTime);
+                          document.getElementById('departure-time').style.display = "block";
+                          document.getElementById('departure-time').textContent = "You can depart at " + departureTime + " on " + meetingStartDate; 
                         }
 
                         //Calculate Free Time
                         if(meetingStartDate===today){
                             var freeTime =mins-curTime;
                             if(freeTime>0){
-                            freeTime=parseInt(freeTime/60)+" hrs "+freeTime%60+" mins";
-                            console.log(freeTime);
+                                freeTime=parseInt(freeTime/60)+" hrs "+freeTime%60+" mins";
+                                console.log(freeTime);
+                                document.getElementById('free-time').style.display = "block";
+                                document.getElementById('free-time').textContent = "You can spend " + freeTime + " before meeting" ;
                             }
-                            else console.log("you are already late for your meeting");
+                            else 
+                                console.log("you are already late for your meeting");
+                                let toast3 = `<div class="toast" id="alreadyLate" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000">
+                                                <div class="toast-header">
+                                                    <strong class="mr-auto">Alert!!</strong>
+                                                    <small class="text-muted">just now</small>
+                                                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="toast-body">
+                                                    You are already late for meeting
+                                                </div>
+                                            </div>`;
+                                document.getElementById('toast-container').innerHTML += toast3; 
+                                $("#alreadyLate").toast('show'); 
                         }
                         
                        

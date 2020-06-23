@@ -24,6 +24,9 @@
         body{
             font-family: 'Roboto', sans-serif;
         }
+        #profilepic{
+            border-radius: 50%;
+        }
     </style>
 </head>
 
@@ -32,10 +35,10 @@
         <div class="container-fluid">
             <a class="navbar-brand d-flex" href="/profile">
                 <% if(user.googleId != "") { %>
-                    <img src = <%= user.thumbnail %> width="30" height="30" class="d-inline-block align-top mr-1" />
+                    <img src = <%= user.thumbnail %> id="profilepic" width="30" height="30" class="d-inline-block align-top mr-1" />
                     <%= user.name %>
                 <% } else if(user.githubId != "") { %>
-                    <img src = <%= user.thumbnail %> width="30" height="30" class="d-inline-block align-top mr-1" />
+                    <img src = <%= user.thumbnail %> id="profilepic" width="30" height="30" class="d-inline-block align-top mr-1" />
                     <%= user.username %>
                 <% } else { %>
                     <%= user.name %>
