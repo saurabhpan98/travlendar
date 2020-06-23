@@ -182,16 +182,20 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4-QOWTvatTe_46i2XOI6tXUIx40hHVQY&libraries=places&callback=initMap" async defer></script>
     <script>
-        var map, directionsRenderer, directionsService, dt = new Date(), start, end, geocoder, mode = "DRIVING";
+        var map, directionsRenderer, directionsService, dt = new Date(), start, end, geocoder, mode = "DRIVING",meetingStartTime, meetingStartDate;
         function initMap() {
             directionsService = new google.maps.DirectionsService();
             directionsRenderer = new google.maps.DirectionsRenderer({
                 draggable: true
             });
-            var mapOptions = {
-                zoom:12,
-                center: { lat: 28.624364, lng: 77.208289 },
-                styles: [
+            var style=[];
+            var today =new Date();
+            var hours = parseInt(today.getHours());
+            var minutes= parseInt(today.getMinutes()) ;
+            if(hours>=0&&hours<=5)hours+=24;
+            console.log(hours+ " " + minutes);
+            if(hours>18||(hours===18 && minutes>=30)){
+                style= [
                     {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
                     {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
                     {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
@@ -272,6 +276,11 @@
                     }
                 ]
             }
+            var mapOptions = {
+                zoom:12,
+                center: { lat: 28.624364, lng: 77.208289 },
+                styles: style
+            }
             map = new google.maps.Map(document.getElementById('map'), mapOptions);
             directionsRenderer.setMap(map);
 
@@ -322,7 +331,7 @@
             document.getElementById('panelOut').style.display = "none";
         }
 
-        function newOriginTime(){
+      /*  function newOriginTime(){
             let newTime = document.getElementById('new-time').value;
             let newOrigin = document.getElementById('new-start').value; 
 
@@ -358,7 +367,7 @@
                 calculateAndDisplayRoute(directionsService, directionsRenderer);  
             }
 
-        }
+        }*/
 
         function calculateAndDisplayRoute(directionsService, directionsRenderer) {
             directionsService.route(
@@ -367,17 +376,49 @@
                     destination: {query: end},
                     travelMode: mode, //DRIVING, WALKING, BICYCLING, TRANSIT
                     provideRouteAlternatives: false,
-                    drivingOptions: {
+                    /*drivingOptions: {
                         departureTime: dt
-                    }
+                    }*/
                 },
                 function(response, status) {
                     if (status === 'OK') {
-                        console.log(response)
+                        //console.log(response)
                         document.getElementById('stats-box').style.display = "block";
                         var distance = response.routes[0].legs[0].distance.text; 
-                        var time = response.routes[0].legs[0].duration.text;
-                        document.getElementById('time').textContent = time; 
+                        var time = response.routes[0].legs[0].duration;
+                        var d=new Date();
+                        var curTime = parseInt(d.getHours())*60+parseInt(d.getMinutes());
+                        // Departure Time calulation
+                        var meetingStart=meetingStartTime.split(":");
+                        var mins= parseInt(meetingStart[0])*60 + parseInt(meetingStart[1]);
+                        mins=mins-parseInt(time.value/60);
+                        if(mins<curTime){
+                            if(curTime-mins<=10)console.log("you are "+curTime-mins+" mins late for meeting");
+                            else if(curTime-mins>10)console.log("you cannot reach at your meeting");
+                        }
+                        else{
+                          var departureTime =parseInt(mins/60)+":"+mins%60;
+                          console.log(departureTime);
+                        }
+
+                        //Calculate Free Time
+                        
+                        var dd = String(d.getDate()).padStart(2, '0');
+                        var mm = String(d.getMonth() + 1).padStart(2, '0'); 
+                        var yyyy = d.getFullYear();
+                        today = yyyy + '-' + mm + '-' + dd; 
+                        if(meetingStartDate===today){
+                            var freeTime =mins-curTime;
+                            if(freeTime>0){
+                            freeTime=parseInt(freeTime/60)+" hrs "+freeTime%60+" mins";
+                            console.log(freeTime);
+                            }
+                            else console.log("you are already late for your meeting");
+                        }
+                        
+                       
+                        
+                        document.getElementById('time').textContent = time.text; 
                         document.getElementById('distance').textContent = '(' + distance + ')'; 
                         directionsRenderer.setDirections(response);
                     } else {
@@ -414,8 +455,9 @@
                         //getting current event info 
                         axios.post(window.location)
                             .then(response =>{
-                                //console.log(response.data)
                                 if(response.data.success){
+                                    meetingStartTime=response.data.event.meetingStartTime;
+                                    meetingStartDate=response.data.event.meetingDate;
                                     end = response.data.event.location;
                                     calculateAndDisplayRoute(directionsService, directionsRenderer);
                                 }
