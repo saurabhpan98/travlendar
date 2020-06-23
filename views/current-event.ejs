@@ -443,7 +443,7 @@
                             }
                         }
                         else{
-                          var departureTime =parseInt(mins/60)+":"+mins%60;
+                          var departureTime =parseInt(mins/60)+":"+((mins%60 < 10) ? ("0" + mins%60) : mins%60);
                           console.log(departureTime);
                           document.getElementById('departure-time').style.display = "block";
                           document.getElementById('departure-time').textContent = "You can depart at " + departureTime + " on " + meetingStartDate; 
@@ -458,7 +458,7 @@
                                 document.getElementById('free-time').style.display = "block";
                                 document.getElementById('free-time').textContent = "You can spend " + freeTime + " before meeting" ;
                             }
-                            else 
+                            /*else {
                                 console.log("you are already late for your meeting");
                                 let toast3 = `<div class="toast" id="alreadyLate" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000">
                                                 <div class="toast-header">
@@ -474,6 +474,8 @@
                                             </div>`;
                                 document.getElementById('toast-container').innerHTML += toast3; 
                                 $("#alreadyLate").toast('show'); 
+                            }*/
+                                
                         }
                         
                        
