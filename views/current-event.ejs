@@ -388,11 +388,15 @@
                         var time = response.routes[0].legs[0].duration;
                         var d=new Date();
                         var curTime = parseInt(d.getHours())*60+parseInt(d.getMinutes());
+                        var dd = String(d.getDate()).padStart(2, '0');
+                        var mm = String(d.getMonth() + 1).padStart(2, '0'); 
+                        var yyyy = d.getFullYear();
+                        today = yyyy + '-' + mm + '-' + dd; 
                         // Departure Time calulation
                         var meetingStart=meetingStartTime.split(":");
                         var mins= parseInt(meetingStart[0])*60 + parseInt(meetingStart[1]);
                         mins=mins-parseInt(time.value/60);
-                        if(mins<curTime){
+                        if(mins<curTime&&meetingStartDate===today){
                             if(curTime-mins<=10)console.log("you are "+curTime-mins+" mins late for meeting");
                             else if(curTime-mins>10)console.log("you cannot reach at your meeting");
                         }
@@ -402,11 +406,6 @@
                         }
 
                         //Calculate Free Time
-                        
-                        var dd = String(d.getDate()).padStart(2, '0');
-                        var mm = String(d.getMonth() + 1).padStart(2, '0'); 
-                        var yyyy = d.getFullYear();
-                        today = yyyy + '-' + mm + '-' + dd; 
                         if(meetingStartDate===today){
                             var freeTime =mins-curTime;
                             if(freeTime>0){
