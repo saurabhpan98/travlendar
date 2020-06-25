@@ -19,6 +19,9 @@ var userSchema=new mongoose.Schema({
   githubId: {
     type: String
   },
+  facebookId: {
+    type: String
+  },
   thumbnail:{
     type:String
   }
