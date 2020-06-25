@@ -1,5 +1,5 @@
 const passport = require('passport');
-const GitHubStrategy = require('passport-github').Strategy;
+const FacebookStrategy = require('passport-facebook');
 const keys = require('./keys');
 const User = require('../model/user');
 
@@ -13,13 +13,14 @@ passport.deserializeUser(function(id, done) {
     });
 });
 
-passport.use(new GitHubStrategy({
-    clientID: keys.github.clientID,
-    clientSecret: keys.github.clientSecret,
-    callbackURL: "http://localhost:5000/github/redirect"
+passport.use(new FacebookStrategy({
+    clientID: keys.facebook.clientID,
+    clientSecret: keys.facebook.clientSecret,
+    callbackURL: "http://localhost:5000/facebook/redirect",
+    profileFields: ['id', 'displayName', 'photos', 'email']
   },
   function(accessToken, refreshToken, profile, done) {
-    User.findOne({githubId: profile.id}).then((currentUser) =>{
+    User.findOne({facebookId: profile.id}).then((currentUser) =>{
         if(currentUser){
           // already have the username
           console.log('already exists');
@@ -33,12 +34,12 @@ passport.use(new GitHubStrategy({
             phone: "",
             password: "",
             googleId: "",
-            githubId: profile.id,
-            facebookId: "",
+            githubId: "",
+            facebookId: profile.id,
             thumbnail: profile.photos[0].value
           }).save().
             then((newUser)=> {
-                console.log('new user is created');
+                console.log('new facebook user is created');
                 done(null,newUser);
             })
             .catch(err =>{
