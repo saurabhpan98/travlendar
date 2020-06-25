@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        <link rel="icon" type="image/png" href="./images/travlendar-icons-1.png"/>
+        <link rel="icon" type="image/png" href="./images/logo-travel.png"/>
         <title>Travlendar / New event</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <link rel="stylesheet" href="assets/fonts/material-icons.min.css">
@@ -48,7 +48,7 @@
             <form id = "event_form" onsubmit="formSubmit()">
                 <h2 class="mt-5 mb-4">New event</h2>
                 <div class="alert-box mb-2" id="alert-box">
-        
+
                 </div>
                 <input type="text" class="text-center form-control mb-3" placeholder="Event name" name="event" id="event" required />
                 <div class="row mb-3">
@@ -111,14 +111,14 @@
                 var autocomplete = new google.maps.places.Autocomplete(input);
                 autocomplete.setFields(
                     ['address_components', 'geometry', 'name']);
-                
+
 
                 autocomplete.addListener('place_changed', function(){
                     var place = autocomplete.getPlace();
                     console.log(place)
                     if(!place.geometry){
                         window.alert("No details available for input: " + place.name);
-                        return; 
+                        return;
                     }
                 })
             }
@@ -133,10 +133,11 @@
                 let newevent = {
                     event: form.event.value,
                     meetingStartDate: form.meetingStartDate.value,
+                    meetingDate: form.meetingStartDate.value,
                     meetingStartTime: form.meetingStartTime.value,
                     meetingEndTime: form.meetingEndTime.value,
                     location: form.location.value,
-                    extraInfo: form.extraInfo.value 
+                    extraInfo: form.extraInfo.value
                 }
                 document.getElementById('accordion').innerHTML = "";
                 conflicts = [];
@@ -165,24 +166,24 @@
                                                 </div>
                                                 </div>
                                             </div>`;
-                                document.getElementById('accordion').innerHTML += card; 
+                                document.getElementById('accordion').innerHTML += card;
                             }
                             $(function(){
                                 $('#conflictModal').modal('show');
                             })
                         }
                         else if(response.data.message == "Event formed"){
-                            
+
                             let alert = '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>New event added.</strong> Go to events to check added event.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
                             document.getElementById('alert-box').innerHTML += alert;
-                            
-                            form.event.value = null; 
+
+                            form.event.value = null;
                             form.meetingStartDate.value = null;
-                            form.meetingEndDate.value = null; 
-                            form.meetingStartTime.value = null; 
-                            form.meetingEndTime.value = null; 
-                            form.location.value = null; 
-                            form.extraInfo.value = null; 
+                            form.meetingEndDate.value = null;
+                            form.meetingStartTime.value = null;
+                            form.meetingEndTime.value = null;
+                            form.location.value = null;
+                            form.extraInfo.value = null;
                         }
                         else{
                             alert(response.data.message);

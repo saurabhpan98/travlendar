@@ -27,7 +27,7 @@ router.get('/new-event', (req, res) =>{
 router.post('/new-event', (req, res)=>{
     if(req.user){
 
-        Event.find({userId: req.user._id, meetingStartDate: req.body.meetingStartDate})
+        Event.find({userId: req.user._id, meetingDate: req.body.meetingDate})
             .then(events =>{
                 var conflictEvents=[];
                 var isConflict = false;
@@ -163,6 +163,105 @@ router.post('/profile/:id', (req, res) =>{
         res.redirect('/login');
     }
 })
+//edit events
+router.get('/editEvent/:id',(req,res)=>{
+  if(req.user){
+    res.render('edit-event',{user:req.user});
+  }
+  else{
+    res.redirect('/login');
+  }
+})
+router.post('/editEvent/:id', (req, res) =>{
+    if(req.user){
+        Event.findOne({_id: req.params.id})
+            .then(event =>{
+                res.json({event, success: true});
+            })
+            .catch(err =>{
+                res.json({message: err, success: false});
+            })
+    }
+    else{
+        res.redirect('/login');
+    }
+})
+
+router.post('/update-event', (req, res) =>{
+  if(req.user){
+    Event.find({userId: req.user._id, meetingDate: req.body.newevent.meetingDate})
+        .then(events =>{
+            var conflictEvents=[];
+            var isConflict = false;
+            events.forEach(event =>{
+                //case 1
+                if(req.body.newevent.meetingStartTime <= event.meetingStartTime && req.body.newevent.meetingEndTime >= event.meetingStartTime && req.body.newevent.meetingEndTime <= event.meetingEndTime && req.body.updateId!=event._id){
+                    conflictEvents.push(event);
+                    isConflict = true;
+                }
+
+                //case 2
+                else if(req.body.newevent.meetingStartTime >= event.meetingStartTime && req.body.newevent.meetingStartTime <= event.meetingEndTime && req.body.newevent.meetingEndTime >= event.meetingEndTime && req.body.updateId!=event._id){
+                    conflictEvents.push(event);
+                    isConflict = true;
+                }
+
+                //case 3
+                else if(req.body.newevent.meetingStartTime >= event.meetingStartTime && req.body.newevent.meetingEndTime <= event.meetingEndTime && req.body.updateId!=event._id){
+                    conflictEvents.push(event);
+                    isConflict = true;
+                }
+
+                //case 4
+                else if(req.body.newevent.meetingStartTime <= event.meetingStartTime && req.body.newevent.meetingEndTime >= event.meetingEndTime && req.body.updateId!=event._id){
+                    conflictEvents.push(event);
+                    isConflict = true;
+                }
+            })
+
+            if(isConflict){
+                res.json({message: "Event conflict", success: false,conflictMeetings :conflictEvents});
+            }
+            else{
+                console.log(req.body.newevent.meetingStartDate);
+                var d = new Date(req.body.newevent.meetingStartDate + " " + req.body.newevent.meetingStartTime);
+                d.setHours(d.getHours() + 5);
+                d.setMinutes(d.getMinutes() + 30);
+                var isodate = d.toISOString();
+                new Event({
+                    userId: req.user._id,
+                    event: req.body.newevent.event,
+                    meetingStartDate: isodate,
+                    meetingDate: req.body.newevent.meetingStartDate,
+                    meetingStartTime: req.body.newevent.meetingStartTime,
+                    meetingEndTime: req.body.newevent.meetingEndTime,
+                    location: req.body.newevent.location,
+                    extraInfo: req.body.newevent.extraInfo
+                }).save()
+                    .then(result =>{
+                      Event.findOneAndDelete({_id: req.body.updateId})
+                        .then(deleted =>{
+                          res.json({message: "Event formed", success: true});
+                        })
+                        .catch(err =>{
+                          res.json({message: err, success: false});
+                        })
+                    })
+                    .catch(err =>{
+                        res.json({message: err, success: false});
+                    })
+            }
+        })
+        .catch(err =>{
+            res.json({message: err, success: false});
+        })
+  }
+  else{
+    res.redirect('/login');
+  }
+})
+
+
 
 router.get('/timeline', (req, res) =>{
     if(req.user){
