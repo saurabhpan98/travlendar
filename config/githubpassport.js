@@ -28,8 +28,8 @@ passport.use(new GitHubStrategy({
         else{
           //create a new username
           new User({
-            username: profile.displayName,
-            name: profile.displayName,
+            username: profile.username,
+            name: profile.username,
             phone: "",
             password: "",
             googleId: "",
