@@ -34,6 +34,7 @@ passport.use(
           password: "",
           googleId: profile.id,
           githubId: "",
+          facebookId: "",
           thumbnail: profile.photos[0].value
         }).save().then((newUser)=> {
           console.log('new user is created');
