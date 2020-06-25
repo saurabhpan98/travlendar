@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="icon" type="image/png" href="./images/travlendar-icons-1.png"/>
-    <title>Travlendar / 
+    <title>Travlendar /
         <% if(user.name) { %>
             <%= user.name %>
         <% } else if(user.googleId != "") { %>
@@ -15,9 +15,9 @@
         <% } %>
     </title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/fonts/material-icons.min.css">
-    <link rel="stylesheet" href="assets/css/Navigation-Clean.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/fonts/material-icons.min.css">
+    <link rel="stylesheet" href="/assets/css/Navigation-Clean.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
     <style>
@@ -68,10 +68,10 @@
         <h1 class="my-4">Coming events</h1>
         <div class="coming-events row">
         </div>
-        
+
         <h1 class="my-4 mt-5">Past events</h1>
         <div class="past-events row">
-            
+
         </div>
     </div>
 
@@ -79,7 +79,7 @@
         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
           <div class="modal-content">
             <div class="modal-body">
-                <h5 class="modal-title mb-2 font-weight-bold" id="deleteModalLongTitle">Delete event!</h5>  
+                <h5 class="modal-title mb-2 font-weight-bold" id="deleteModalLongTitle">Delete event!</h5>
                 <p>Are you sure to delete this event?</p>
                 <button type="button" class="btn btn-primary float-right" onclick = "deleteEvent()">Delete</button>
                 <button type="button" class="btn btn-light mr-2 float-right" data-dismiss="modal">Cancel</button>
@@ -109,7 +109,7 @@
         let deleteId;
         function showDeleteModal(id){
             //console.log(deleteId)
-            deleteId = id; 
+            deleteId = id;
             $('#deleteModal').modal('show');
         }
 
@@ -129,7 +129,7 @@
         function timelineAlert(){
             $("#timelinetoast").toast('show');
         }
-        
+
         axios.get('/myevents')
             .then(response =>{
                 if(response.data.success){
@@ -140,35 +140,35 @@
                     let events = response.data.events;
                     var today = new Date();
                     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-                    var time = today.getHours() + ":" + today.getMinutes() 
-                    var d = new Date(date + " " + time);   
+                    var time = today.getHours() + ":" + today.getMinutes()
+                    var d = new Date(date + " " + time);
                     d.setHours(d.getHours() + 5);
                     d.setMinutes(d.getMinutes() + 30);
-                    var isodate = d.toISOString(); 
-                    
+                    var isodate = d.toISOString();
+
                     let upComingCount = 0, pastCount = 0;
-                    
+
                     for(let i = 0; i < events.length; i++){
-                        let event = events[i];
-                        if(event.meetingStartDate>=isodate){
-                            let date = event.meetingStartDate.split("T");
-                            let item = `<div class="col-sm-4 my-2 h-100"">
-                                            <div class="pl-1 bg-primary shadow-sm rounded" style="height: 100%;">
-                                                <div class="p-2 pl-3 bg-white rounded" style="height: 100%;">
-                                                    <h4 class="mb-3">${event.event}</h4>
-                                                    <span class="d-block"><strong>Meeting on:</strong> ${date[0]}</span>
-                                                    <span class="d-block"><strong>Meeting time:</strong> ${event.meetingStartTime} to ${event.meetingEndTime}</span>
-                                                    <span class="d-block mt-3"><strong>Location:</strong> <span style = "white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; display: inline-block;">${event.location}<span></span>
-                                                    <div class="w-100 d-flex pb-2">
-                                                        <a class="text-center text-primary w-100 material-icons mt-3 mx-2 text-decoration-none" href="/profile/${event._id}" data-toggle="tooltip" data-placement="bottom" title="View event">search</a>
-                                                        <a class="text-center text-dark w-100 material-icons mt-3 mx-2 text-decoration-none" href="#" data-toggle="tooltip" data-placement="bottom" title="Edit event">edit</a>
-                                                        <a class="text-center text-danger w-100 material-icons mt-3 mx-2 text-decoration-none" href="#" data-toggle="tooltip" data-placement="bottom" title="Delete event" onclick="showDeleteModal('${event._id}')">delete</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>`;
-                            comingEvents.innerHTML += item; 
-                            upComingCount += 1;
+                      let event = events[i];
+                      if(event.meetingStartDate>=isodate){
+                          let date = event.meetingStartDate.split("T");
+                          let item = `<div class="col-sm-4 my-2 h-100"">
+                                          <div class="pl-1 bg-primary shadow-sm rounded" style="height: 100%;">
+                                              <div class="p-2 pl-3 bg-white rounded" style="height: 100%;">
+                                                  <h4 class="mb-3">${event.event}</h4>
+                                                  <span class="d-block"><strong>Meeting on:</strong> ${date[0]}</span>
+                                                  <span class="d-block"><strong>Meeting time:</strong> ${event.meetingStartTime} to ${event.meetingEndTime}</span>
+                                                  <span class="d-block mt-3"><strong>Location:</strong> <span style = "white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; display: inline-block;">${event.location}<span></span>
+                                                  <div class="w-100 d-flex pb-2">
+                                                      <a class="text-center text-primary w-100 material-icons mt-3 mx-2 text-decoration-none" href="/profile/${event._id}" data-toggle="tooltip" data-placement="bottom" title="View event">search</a>
+                                                      <a class="text-center text-dark w-100 material-icons mt-3 mx-2 text-decoration-none" href="/editEvent/${event._id}" data-toggle="tooltip" data-placement="bottom" title="Edit event">edit</a>
+                                                      <a class="text-center text-danger w-100 material-icons mt-3 mx-2 text-decoration-none" href="#" data-toggle="tooltip" data-placement="bottom" title="Delete event" onclick="showDeleteModal('${event._id}')">delete</a>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>`;
+                          comingEvents.innerHTML += item;
+                          upComingCount += 1;
                         }
                         else{
                             let date = event.meetingStartDate.split("T");
@@ -187,7 +187,7 @@
                                                 </div>
                                             </div>
                                         </div>`;
-                            pastEvents.innerHTML += item; 
+                            pastEvents.innerHTML += item;
                             pastCount += 1;
                         }
                     }
