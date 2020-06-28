@@ -31,3 +31,8 @@ https://github.com/saurabhpan98/travlendar.git
     git push origin <my_branch_name>
     And then do some other stuff on github 
 17. Fork -> to copy someone else repo to my account 
+18. Update local branch with master after pulling from remote 
+    git pull origin master 
+    git checkout <branch>
+    git merge master 
+    //solve the conflicts if any 
