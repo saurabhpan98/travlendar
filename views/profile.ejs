@@ -136,7 +136,7 @@
                     d.setMinutes(d.getMinutes() + 30);
                     var isodate = d.toISOString();
 
-                    let upComingCount = 0, pastCount = 0;
+                    let upComingCount = 0, pastCount = 0, todayEvents = false;
 
                     for(let i = 0; i < events.length; i++){
                       let event = events[i];
@@ -159,6 +159,12 @@
                                       </div>`;
                           comingEvents.innerHTML += item;
                           upComingCount += 1;
+                          
+                          //checking today's events 
+                            let today = new Date();
+                            let todayDate = today.getFullYear()+'-'+((today.getMonth()+1) < 10 ? "0"+(today.getMonth()+1) : (today.getMonth()+1))+'-'+((today.getDate() < 10) ? "0"+today.getDate() : today.getDate());
+                            if(todayDate == date)
+                                todayEvents = true;
                         }
                         else{
                             let date = event.meetingStartDate.split("T");
@@ -184,12 +190,15 @@
 
                     //do here
                     if(upComingCount == 0){
-                        document.getElementById('todays-timeline').setAttribute('href', "#");
-                        document.getElementById('todays-timeline').setAttribute('onclick', 'timelineAlert()');
                         comingEvents.innerHTML += '<p class="lead pl-3">No upcoming events present</p>';
                     }
                     if(pastCount == 0){
                         pastEvents.innerHTML += '<p class="lead pl-3">No past events present</p>';
+                    }
+                    if(todayEvents){
+                        console.log("no today's event")
+                        document.getElementById('todays-timeline').setAttribute('href', "#");
+                        document.getElementById('todays-timeline').setAttribute('onclick', 'timelineAlert()');
                     }
                 }
                 else{

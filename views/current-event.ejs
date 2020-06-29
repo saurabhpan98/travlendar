@@ -212,9 +212,7 @@
         var map, directionsRenderer, directionsService, dt = new Date(), start, end, geocoder, mode = "DRIVING",meetingStartTime, meetingStartDate;
         function initMap() {
             directionsService = new google.maps.DirectionsService();
-            directionsRenderer = new google.maps.DirectionsRenderer({
-                draggable: true
-            });
+            directionsRenderer = new google.maps.DirectionsRenderer;
             var style=[];
             var today =new Date();
             var hours = parseInt(today.getHours());
