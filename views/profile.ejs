@@ -92,9 +92,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src = "/scripts/profile-script.js"></script>
     <script>
-        $(function(){
-            $('[data-toggle="tooltip"]').tooltip()
-        })
         
         let deleteId;
         function showDeleteModal(id){
@@ -148,7 +145,7 @@
                                                   <h4 class="mb-3">${event.event}</h4>
                                                   <span class="d-block"><strong>Meeting on:</strong> ${date[0]}</span>
                                                   <span class="d-block"><strong>Meeting time:</strong> ${event.meetingStartTime} to ${event.meetingEndTime}</span>
-                                                  <span class="d-block mt-3"><strong>Location:</strong> <span style = "white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; display: inline-block;">${event.location}<span></span>
+                                                  <span class="d-block mt-3" style = "white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; display: inline-block;"><strong>Location:</strong> <span>${event.location}<span></span>
                                                   <div class="w-100 d-flex pb-2">
                                                       <a class="text-center text-primary w-100 material-icons mt-3 mx-2 text-decoration-none" href="/profile/${event._id}" data-toggle="tooltip" data-placement="bottom" title="View event">search</a>
                                                       <a class="text-center text-dark w-100 material-icons mt-3 mx-2 text-decoration-none" href="/editEvent/${event._id}" data-toggle="tooltip" data-placement="bottom" title="Edit event">edit</a>
@@ -174,7 +171,7 @@
                                                     <h4 class="mb-3">${event.event}</h4>
                                                     <span class="d-block"><strong>Meeting on:</strong> ${date[0]}</span>
                                                     <span class="d-block"><strong>Meeting time:</strong> ${event.meetingStartTime} to ${event.meetingEndTime}</span>
-                                                    <span class="d-block mt-3"><strong>Location:</strong> <span style = "white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; display: inline-block;">${event.location}</span></span>
+                                                    <span class="d-block mt-3" style = "white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; display: inline-block;"><strong>Location:</strong> <span>${event.location}</span></span>
                                                     <div class="w-100 d-flex pb-2">
                                                         <a class="text-center text-primary w-100 material-icons mt-3 mx-2 text-decoration-none" href="#" data-toggle="tooltip" data-placement="bottom" title="View not available">search</a>
                                                         <a class="text-center text-dark w-100 material-icons mt-3 mx-2 text-decoration-none" href="#" data-toggle="tooltip" data-placement="bottom" title="Edit not available">edit</a>
@@ -187,6 +184,7 @@
                             pastCount += 1;
                         }
                     }
+                    $('[data-toggle="tooltip"]').tooltip();
 
                     //do here
                     if(upComingCount == 0){
