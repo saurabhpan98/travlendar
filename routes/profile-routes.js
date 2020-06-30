@@ -31,6 +31,7 @@ router.post('/new-event', (req, res)=>{
             .then(events =>{
                 var conflictEvents=[];
                 var isConflict = false;
+                console.log(events);
                 events.forEach(event =>{
                     //case 1
                     if(req.body.meetingStartTime <= event.meetingStartTime && req.body.meetingEndTime >= event.meetingStartTime && req.body.meetingEndTime <= event.meetingEndTime){
@@ -56,7 +57,7 @@ router.post('/new-event', (req, res)=>{
                         isConflict = true;
                     }
                 })
-
+                console.log(conflictEvents);
                 if(isConflict){
                     res.json({message: "Event conflict", success: false,conflictMeetings :conflictEvents});
                 }
