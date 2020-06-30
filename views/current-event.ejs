@@ -421,13 +421,15 @@
                         var mm = String(d.getMonth() + 1).padStart(2, '0'); 
                         var yyyy = d.getFullYear();
                         today = yyyy + '-' + mm + '-' + dd; 
-                        // Departure Time calulation
+                        
+                        //Departure Time calulation
                         var meetingStart=meetingStartTime.split(":");
                         var mins= parseInt(meetingStart[0])*60 + parseInt(meetingStart[1]);
                         mins=mins-parseInt(time.value/60);
+                        var late=parseInt(curTime-mins);
                         if(mins<curTime&&meetingStartDate===today){
-                            if(curTime-mins<=10){
-                                console.log("you are "+curTime-mins+" mins late for meeting");
+                            if(late<11){
+                                console.log("you are "+late+" mins late for meeting");
                                 let toast1 = `<div class="toast" id="minlate" role="alert" aria-live="assertive" aria-atomic="true">
                                                 <div class="toast-header">
                                                     <strong class="mr-auto">Alert!!</strong>
@@ -437,7 +439,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="toast-body">
-                                                    You are ${curTime-mins} mins late for meeting
+                                                    You are ${late} mins late for meeting
                                                 </div>
                                             </div>`;
                                 document.getElementById('toast-container').innerHTML += toast1;
