@@ -209,7 +209,7 @@
 
         //$('#x').toast('show');
 
-        var map, directionsRenderer, directionsService, dt = new Date(), start, end, geocoder, mode = "DRIVING",meetingStartTime, meetingStartDate;
+        var map, directionsRenderer, directionsService, dt = new Date(), start, end, geocoder, mode = "DRIVING",meetingStartTime, meetingStartDate,miniTime,shortestMode;
         function initMap() {
             directionsService = new google.maps.DirectionsService();
             directionsRenderer = new google.maps.DirectionsRenderer;
@@ -428,7 +428,7 @@
                         if(mins<curTime&&meetingStartDate===today){
                             if(curTime-mins<=10){
                                 console.log("you are "+curTime-mins+" mins late for meeting");
-                                let toast1 = `<div class="toast" id="minlate" role="alert" aria-live="assertive" aria-atomic="true" data-delay="10000">
+                                let toast1 = `<div class="toast" id="minlate" role="alert" aria-live="assertive" aria-atomic="true">
                                                 <div class="toast-header">
                                                     <strong class="mr-auto">Alert!!</strong>
                                                     <small class="text-muted">just now</small>
@@ -548,6 +548,7 @@
                                     document.getElementById('event-time').textContent = response.data.event.meetingStartTime + ' to ' + response.data.event.meetingEndTime;
                                     document.getElementById('event-location').textContent = response.data.event.location;
 
+                                   
                                     calculateAndDisplayRoute(directionsService, directionsRenderer);
                                 }
                                 else{
