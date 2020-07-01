@@ -42,14 +42,14 @@
         </div>
     </nav>
     <div class="container py-5">
-        <a class="btn btn-outline-primary ml-2 d-inline-flex" href="/new-event">
+        <a class="btn btn-outline-primary d-inline-flex" href="/new-event">
             <i class="material-icons">edit</i>
             <span>Add new event</span>
         </a>
         <a class="btn btn-outline-warning ml-2 d-inline-flex" id="todays-timeline" href="/timeline">
             <i class="material-icons">location_on</i>
             <span>Today's timeline</span>
-        </a>
+        </a> 
         <h1 class="my-4">Coming events</h1>
         <div class="coming-events row">
         </div>
@@ -120,7 +120,7 @@
         axios.get('/myevents')
             .then(response =>{
                 if(response.data.success){
-                    console.log(response)
+                    //console.log(response)
                     let comingEvents = document.getElementsByClassName('coming-events')[0];
                     let pastEvents = document.getElementsByClassName('past-events')[0];
 
@@ -193,7 +193,7 @@
                     if(pastCount == 0){
                         pastEvents.innerHTML += '<p class="lead pl-3">No past events present</p>';
                     }
-                    if(todayEvents){
+                    if(!todayEvents){
                         console.log("no today's event")
                         document.getElementById('todays-timeline').setAttribute('href', "#");
                         document.getElementById('todays-timeline').setAttribute('onclick', 'timelineAlert()');

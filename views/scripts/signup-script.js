@@ -32,10 +32,10 @@ function submitForm(){
           form.username.value = null; 
           form.phone.value = null;
           form.password.value = null; 
-          alert = '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Signup successful.</strong> You can <a href="/login.html" class="alert-link"> Login </a> now.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+          alert = '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Signup successful.</strong> You can <a href="/login" class="alert-link"> Login </a> now.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
         }
         else if(result.message == "user already present"){
-          alert = '<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>User already present.</strong> <a href="/login.html" class="alert-link"> Login </a> instead.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+          alert = '<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>User already present.</strong> <a href="/login" class="alert-link"> Login </a> instead.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
         }
         else{
           alert = '<div class="alert alert-danger alert-dismissible fade show" role="alert">Signup not successful. Try again. <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
