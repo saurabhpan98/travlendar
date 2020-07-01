@@ -160,7 +160,9 @@
                           //checking today's events 
                             let today = new Date();
                             let todayDate = today.getFullYear()+'-'+((today.getMonth()+1) < 10 ? "0"+(today.getMonth()+1) : (today.getMonth()+1))+'-'+((today.getDate() < 10) ? "0"+today.getDate() : today.getDate());
-                            if(todayDate == date)
+                            console.log(todayDate)
+                            console.log(date[0])
+                            if(todayDate == date[0])
                                 todayEvents = true;
                         }
                         else{
@@ -193,7 +195,7 @@
                     if(pastCount == 0){
                         pastEvents.innerHTML += '<p class="lead pl-3">No past events present</p>';
                     }
-                    if(!todayEvents){
+                    if(todayEvents == false){
                         console.log("no today's event")
                         document.getElementById('todays-timeline').setAttribute('href', "#");
                         document.getElementById('todays-timeline').setAttribute('onclick', 'timelineAlert()');

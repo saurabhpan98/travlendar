@@ -59,14 +59,20 @@ router.post('/new-event', (req, res)=>{
                 })
                 console.log(conflictEvents);
                 if(isConflict){
+                    console.log('conflict events')
                     res.json({message: "Event conflict", success: false,conflictMeetings :conflictEvents});
                 }
                 else{
                     console.log(req.body.meetingStartDate);
+                    console.log(new Date())
                     var d = new Date(req.body.meetingStartDate + " " + req.body.meetingStartTime);
+                    console.log(d)
                     d.setHours(d.getHours() + 5);
+                    console.log(d)
                     d.setMinutes(d.getMinutes() + 30);
+                    console.log(d)
                     var isodate = d.toISOString();
+                    console.log(isodate)
                     new Event({
                         userId: req.user._id,
                         event: req.body.event,
@@ -78,6 +84,7 @@ router.post('/new-event', (req, res)=>{
                         extraInfo: req.body.extraInfo
                     }).save()
                         .then(result =>{
+                            console.log(result)
                             res.json({message: "Event formed", success: true});
                         })
                         .catch(err =>{
