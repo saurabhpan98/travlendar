@@ -531,7 +531,7 @@
                             document.getElementById('weather-location').textContent = response.data.name;
                             document.getElementById('weather-report').textContent = response.data.weather[0].description;
                             document.getElementById('temp-min').innerHTML = 'Min: ' + response.data.main.temp_min + '&deg; c';
-                            document.getElementById('temp-max').innerHTML = 'Max' + response.data.main.temp_max + '&deg; c';
+                            document.getElementById('temp-max').innerHTML = 'Max: ' + response.data.main.temp_max + '&deg; c';
 
                             let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
                             let today = new Date();
