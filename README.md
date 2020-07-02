@@ -19,3 +19,18 @@
  #### Optional features (included)
  1. Weather support - Can check weather before leaving for any meeting
  2. Would get notified about extra time that can be spent for lunch, rest, etc.
+ 
+
+
+ ## Tech Used 
+  #### Frontend 
+  1. HTML 
+  2. CSS 
+  3. Javascript, jQuery, axios
+  4. Framework - Bootstrap
+  5. APIs - Google Maps (Places, Directions, Javascript), Openweathermap 
+
+  #### Backend 
+  1. NodeJs
+  2. Mongodb 
+  3. Passport (Local, Google, Github, Facebook), Express, Mongoose, EJS
