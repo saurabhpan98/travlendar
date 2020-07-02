@@ -16,7 +16,7 @@ passport.deserializeUser(function(id, done) {
 passport.use(new GitHubStrategy({
     clientID: keys.github.clientID,
     clientSecret: keys.github.clientSecret,
-    callbackURL: "http://localhost:5000/github/redirect"
+    callbackURL: "https://travlendarsks.herokuapp.com/github/redirect"
   },
   function(accessToken, refreshToken, profile, done) {
     User.findOne({githubId: profile.id}).then((currentUser) =>{
