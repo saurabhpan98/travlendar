@@ -20,9 +20,6 @@
                 max-width: 600px;
                 margin: 0 auto;
             }
-            #profilepic{
-                border-radius: 50%;
-            }
         </style>
 
     </head>
@@ -31,15 +28,10 @@
         <nav class="navbar navbar-light navbar-expand-md shadow-sm">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/profile">
-                    <% if(user.googleId != "") { %>
-                        <img src = <%= user.thumbnail %> id="profilepic" width="30" height="30" class="d-inline-block align-top mr-1" />
-                        <%= user.name %>
-                    <% } else if(user.githubId != "") { %>
-                        <img src = <%= user.thumbnail %> id="profilepic" width="30" height="30" class="d-inline-block align-top mr-1" />
-                        <%= user.username %>
-                    <% } else { %>
-                        <%= user.name %>
+                    <% if(user.thumbnail != ""){ %>
+                        <img src = <%= user.thumbnail %> id="profilepic" width="30" height="30" class="d-inline-block align-top mr-1 rounded" /> 
                     <% } %>
+                    <%= user.name %>
                 </a>
                 <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse"
