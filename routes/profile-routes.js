@@ -7,15 +7,6 @@ const path = require('path');
 const Event = require('../model/event.js');
 const { findOneAndDelete } = require('../model/event.js');
 
-router.get('/get-profile', (req, res) =>{
-    if(req.user){
-        res.json(req.user);
-    }
-    else{
-        res.json({message: "Login to see deatils", success: false});
-    }
-})
-
 router.get('/new-event', (req, res) =>{
     if(req.user)
         res.render('new-event', {user: req.user});
@@ -66,11 +57,11 @@ router.post('/new-event', (req, res)=>{
                     console.log(req.body.meetingStartDate);
                     console.log(new Date())
                     var d = new Date(req.body.meetingStartDate + " " + req.body.meetingStartTime);
-                    console.log(d)
-                    d.setHours(d.getHours() + 5);
-                    console.log(d)
-                    d.setMinutes(d.getMinutes() + 30);
-                    console.log(d)
+                    //console.log(d)
+                    //d.setHours(d.getHours() + 5);
+                    //console.log(d)
+                    //d.setMinutes(d.getMinutes() + 30);
+                    //console.log(d)
                     var isodate = d.toISOString();
                     console.log(isodate)
                     new Event({
@@ -233,8 +224,8 @@ router.post('/update-event', (req, res) =>{
             else{
                 console.log(req.body.newevent.meetingStartDate);
                 var d = new Date(req.body.newevent.meetingStartDate + " " + req.body.newevent.meetingStartTime);
-                d.setHours(d.getHours() + 5);
-                d.setMinutes(d.getMinutes() + 30);
+                //d.setHours(d.getHours() + 5);
+                //d.setMinutes(d.getMinutes() + 30);
                 var isodate = d.toISOString();
                 new Event({
                     userId: req.user._id,
