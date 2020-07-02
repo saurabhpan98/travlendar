@@ -16,7 +16,7 @@ passport.deserializeUser(function(id, done) {
 passport.use(new FacebookStrategy({
     clientID: keys.facebook.clientID,
     clientSecret: keys.facebook.clientSecret,
-    callbackURL: "http://localhost:5000/facebook/redirect",
+    callbackURL: "https://travlendarsks.herokuapp.com/facebook/redirect",
     profileFields: ['id', 'displayName', 'photos', 'email']
   },
   function(accessToken, refreshToken, profile, done) {
