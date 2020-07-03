@@ -32,21 +32,21 @@
             <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item px-2"><a class="nav-link" href="/">Home</a></li>
-                    <li class="nav-item px-2"><a class="nav-link" href="/profile">Events</a></li>
-                    <li class="nav-item px-2"><a class="nav-link" href="/logout">Logout</a></li>
+                    <li class="nav-item px-2" style="z-index: 1;"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item px-2" style="z-index: 1;"><a class="nav-link" href="/profile">Events</a></li>
+                    <li class="nav-item px-2" style="z-index: 1;"><a class="nav-link" href="/logout">Logout</a></li>
                 </ul>
             </div>
         </div>
     </nav>
     <div class="container py-5">
-        <a class="btn btn-outline-primary d-inline-flex" href="/new-event">
-            <i class="material-icons">edit</i>
-            <span>Add event</span>
+        <a class="btn btn-outline-primary d-inline-flex" href="/new-event" style="z-index: 1;">
+            <i class="material-icons" style="z-index: 1;">edit</i>
+            <span style="z-index: 1;">Add event</span>
         </a>
-        <a class="btn btn-outline-warning ml-2 d-inline-flex" id="todays-timeline" href="/timeline">
-            <i class="material-icons">location_on</i>
-            <span>Timeline</span>
+        <a class="btn btn-outline-warning ml-2 d-inline-flex" id="todays-timeline" href="/timeline" style="z-index: 1;">
+            <i class="material-icons" style="z-index: 1;">location_on</i>
+            <span style="z-index: 1;">Timeline</span>
         </a> 
         <h1 class="my-4">Coming events</h1>
         <div class="coming-events row">
