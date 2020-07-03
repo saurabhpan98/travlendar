@@ -15,6 +15,21 @@
         body{
             font-family: 'Roboto', sans-serif;
         }
+
+        /*------Scrollbar ------*/
+        body::-webkit-scrollbar {
+            width: 0.8em;
+        }
+        
+        body::-webkit-scrollbar-track {
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        body::-webkit-scrollbar-thumb {
+            background-color: #0088FF;
+            outline: 1px solid #0088FF;
+            border-radius: 10px;
+        }
     </style>
 </head>
 
@@ -48,11 +63,11 @@
         <div class="row">
             <div class="col-sm-6 mb-4">
                 <div class="social-login">
-                    <h4 class="mb-3 mt-3 text-center">Social signup</h4>
+                    <h4 class="mb-3 mt-3 text-center d-none d-md-block d-lg-block d-xl-block">Social signup</h4>
                     <a class="btn btn-outline-danger btn-block mb-3" href="/google" role="button">
                         <div class="row">
                             <div class="col-4"><span class="fa fa-google text-left"></span></div>
-                            <div class="col-8 text-left"><span class="text-left">Continue with Google+</span></div>
+                            <div class="col-8 text-left"><span class="text-left">Continue with Gmail</span></div>
                         </div>
                     </a>
                     <a class="btn btn-outline-dark btn-block mb-3" href="/github" role="button">
@@ -71,7 +86,8 @@
             </div>
             <div class="col-sm-6">
                 <form class="signup-form" id="signup-form" method = "POST" onsubmit = "submitForm()">
-                    <h4 class="mb-3 text-center">Local signup</h4>
+                    <h4 class="mb-4 text-center d-sm-block d-md-none d-lg-none d-xl-none">Or</h4>
+                    <h4 class="mb-3 text-center d-none d-md-block d-lg-block d-xl-block">Norma signup</h4>
                     <div class="alert-box mb-2" id="alert-box">
         
                     </div>

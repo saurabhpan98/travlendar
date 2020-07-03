@@ -168,6 +168,21 @@
         .footer .contact-form input, .footer .contact-form textarea{
             background: rgba(0,0,0,0);
         }
+
+        /*------Scrollbar ------*/
+        body::-webkit-scrollbar {
+            width: 0.8em;
+        }
+        
+        body::-webkit-scrollbar-track {
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        body::-webkit-scrollbar-thumb {
+            background-color: #0088FF;
+            outline: 1px solid #0088FF;
+            border-radius: 10px;
+        }
     </style>
 </head>
 
@@ -419,7 +434,7 @@
         <div class="section my-5 py-5 signup-login">
             <div class="row py-5 mt-3">
                 <div class="col-sm-9">
-                    <h3 class="text-center font-weight-bold mb-3">Signup for Travlendar today</h3>
+                    <h3 class="text-center mb-3">Signup for Travlendar today</h3>
                     <p class="m-auto text-center" style="max-width: 600px;">From getting notifications, setting up events and choosing the
                     right mode of transportation and more, you'll discover the effortless
                     way to stay on top of it all.</p>
@@ -459,6 +474,7 @@
                         <a href="/team" class="text-decoration-none text-white mb-2 d-inline-block w-50">Team</a>
                         <a href="/login" class="text-decoration-none text-white mb-2 w-50">Login</a>
                         <a href="/signup" class="text-decoration-none text-white mb-2 d-inline-block w-50">Signup</a>
+                        <a href="/signup" class="text-decoration-none text-white mb-2 w-50">Privacy Policy</a>
                     </div>
                 </div>
                 <div class="row mt-4 mb-4">

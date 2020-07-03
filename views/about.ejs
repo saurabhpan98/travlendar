@@ -151,6 +151,21 @@
           from{ transform: translate(-163px, -100px) scale(1) rotate(-120deg); }
           to { transform: translate(-163px, -100px) scale(1.3) rotate(-120deg); }
         }
+
+        /*------Scrollbar ------*/
+        body::-webkit-scrollbar {
+            width: 0.8em;
+        }
+        
+        body::-webkit-scrollbar-track {
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        body::-webkit-scrollbar-thumb {
+            background-color: #0088FF;
+            outline: 1px solid #0088FF;
+            border-radius: 10px;
+        }
     </style>
 </head>
 
