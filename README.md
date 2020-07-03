@@ -1,5 +1,5 @@
 # TRAVLENDAR
-**A Web app for daily busy travelers**
+**A Web app for daily busy travelers** <br/>
 **url** - https://travlendarsks.herokuapp.com/
 
 ## Problem statement
