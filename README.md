@@ -3,6 +3,12 @@
 **url** - https://travlendarsks.herokuapp.com/
 
 <br/><br/>
+## Our team 
+- @AshiwalKaran
+- @sysachin
+- @saurabhpan98
+
+<br/><br/>
 ## Problem statement
 > Many endeavors require scheduling meetings at various locations all across a city, whether in support of a mobile job or a busy parent. The goal of this project is to create a interface that automatically computes and accounts for travel time between appointments to make sure that you're never late for an appointment. Locations of meetings are required to create meetings, and when meetings are created at locations that are unreachable in the allotted time, a warning is created. The application should also suggest travel means. The application should be user customizable (e.g., the user should be able to select preferred (or non-preferred) means of transportation). Additional features could also be envisioned, for instance allowing a user to specify a flexible "lunch". Similarly other types of breaks might be scheduled in a customizable way.
 
