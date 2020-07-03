@@ -33,4 +33,18 @@
   #### Backend 
   1. NodeJs
   2. Mongodb 
-  3. Passport (Local, Google, Github, Facebook), Express, Mongoose, EJS
+  3. Passport (Local, Google, Github, Facebook), Express, Mongoose, EJS, Bcrypt(Password hashing)
+
+
+
+## How to run project on local machine?
+  First open cmd in your machine and just follow these basic commands - 
+  ```
+  cd desktop 
+  git clone https://github.com/saurabhpan98/travlendar.git
+  cd travlendar 
+  npm install 
+  npm install -g nodemon 
+  nodemon app.js 
+  ```
+  Then open browser and type http://localhost:5000, and it's done. Enjoy travlendar 
